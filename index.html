@@ -148,13 +148,11 @@ body{
 
 </div>
 </body>
-<div id="playlist" style="margin-top:20px"></div>
-<br><br>
-<button id="playBtn">▶ Play</button>
-<br><br>
-<button id="shuffleBtn">🔀 Shuffle Off</button>
-<br><br>
-<button id="repeatBtn">🔁 Repeat Off</button>
+<button onclick="togglePlay()" id="playBtn">▶ Play</button>
+
+<button onclick="toggleShuffle()" id="shuffleBtn">🔀 Shuffle Off</button>
+
+<button onclick="toggleRepeat()" id="repeatBtn">🔁 Repeat Off</button>
 
 
 <div class="song" onclick="playSong(0)">Song 1</div>
@@ -219,15 +217,49 @@ function prevSong(){
 }
 
 // AUTO NEXT
+let isPlaying = false;
+let isShuffle = false;
+let isRepeat = false;
+
+/* PLAY / PAUSE */
+function togglePlay(){
+  if(player.paused){
+    player.play();
+    document.getElementById("playBtn").innerText="⏸ Pause";
+  }else{
+    player.pause();
+    document.getElementById("playBtn").innerText="▶ Play";
+  }
+}
+
+/* SHUFFLE */
+function toggleShuffle(){
+  isShuffle = !isShuffle;
+  document.getElementById("shuffleBtn").innerText =
+    isShuffle ? "🔀 Shuffle On" : "🔀 Shuffle Off";
+}
+
+/* REPEAT */
+function toggleRepeat(){
+  isRepeat = !isRepeat;
+  document.getElementById("repeatBtn").innerText =
+    isRepeat ? "🔁 Repeat On" : "🔁 Repeat Off";
+}
+
+/* AUTO NEXT UPDATE */
 player.onended = function(){
-
-    if(repeat){
-        playSong(current);   // same song again
-    }else{
-        nextSong();          // next / shuffle logic
-    }
-
+  if(isRepeat){
+    playSong(current);
+  }
+  else if(isShuffle){
+    let r = Math.floor(Math.random()*songs.length);
+    playSong(r);
+  }
+  else{
+    nextSong();
+  }
 };
+
 
 
 // duration load aana apram
