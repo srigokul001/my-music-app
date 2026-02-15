@@ -52,6 +52,7 @@ body{
 <audio id="player" controls></audio>
 <br><br>
 <button id="playBtn">▶ Play</button>
+<button id="shuffleBtn">🔀 Shuffle Off</button>
 <input type="range" id="progress" value="0" min="0" step="1" style="width:300px">
 <div id="time">0:00 / 0:00</div>
 <div>
@@ -96,11 +97,16 @@ function playSong(index){
 
 // NEXT
 function nextSong(){
-    current++;
-    if(current >= songs.length) current = 0;
+
+    if(shuffle){
+        current = Math.floor(Math.random() * songs.length);
+    }else{
+        current++;
+        if(current >= songs.length) current = 0;
+    }
+
     playSong(current);
 }
-
 // PREVIOUS
 function prevSong(){
     current--;
@@ -161,6 +167,19 @@ playBtn.onclick = function(){
 // song play aana button change
 player.onplay = () => playBtn.innerText="⏸ Pause";
 player.onpause = () => playBtn.innerText="▶ Play";
+let shuffle = false;
+let shuffleBtn = document.getElementById("shuffleBtn");
+
+shuffleBtn.onclick = function(){
+    shuffle = !shuffle;
+
+    if(shuffle){
+        shuffleBtn.innerText = "🔀 Shuffle On";
+    }else{
+        shuffleBtn.innerText = "🔀 Shuffle Off";
+    }
+};
+
 
 
 </script>
