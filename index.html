@@ -50,15 +50,24 @@ body{
 <h2 id="title">Select a song</h2>
 
 <audio id="player" controls></audio>
+<br>
+
+<input type="range" id="progress" value="0" min="0" max="100" style="width:300px">
+
+<div id="time">0:00 / 0:00</div>
+
 <br><br>
 
 <input type="text" id="search" placeholder="Search song..." onkeyup="filterSongs()" style="padding:8px;width:200px">
 
 <div id="playlist" style="margin-top:20px"></div>
-
+<br><br>
 <button id="playBtn">▶ Play</button>
+<br><br>
 <button id="shuffleBtn">🔀 Shuffle Off</button>
+<br><br>
 <button id="repeatBtn">🔁 Repeat Off</button>
+<br><br>
 <input type="range" id="progress" value="0" min="0" step="1" style="width:300px">
 <div id="time">0:00 / 0:00</div>
 <div>
@@ -234,6 +243,41 @@ function filterSongs(){
 
 // first load
 renderSongs(songs);
+let progress = document.getElementById("progress");
+let time = document.getElementById("time");
+
+// duration load aana apram
+player.onloadedmetadata = function(){
+    progress.max = Math.floor(player.duration);
+    updateTime();
+};
+
+// song odumbothu bar move
+player.ontimeupdate = function(){
+    progress.value = Math.floor(player.currentTime);
+    updateTime();
+};
+
+// drag pannina seek
+progress.oninput = function(){
+    player.currentTime = progress.value;
+};
+
+// time format
+function updateTime(){
+    let cur = format(player.currentTime);
+    let dur = format(player.duration);
+    time.innerText = cur + " / " + dur;
+}
+
+function format(sec){
+    if(!sec) return "0:00";
+    let m = Math.floor(sec/60);
+    let s = Math.floor(sec%60);
+    if(s<10) s="0"+s;
+    return m+":"+s;
+}
+
 
 
 
