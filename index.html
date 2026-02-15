@@ -2,6 +2,87 @@
 <html>
 <head>
     <title>My Music App</title>
+    <style>
+
+body{
+    margin:0;
+    background:#121212;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* player card */
+.container{
+    max-width:400px;
+    margin:auto;
+    padding:20px;
+    text-align:center;
+}
+
+/* album cover */
+#cover{
+    width:100%;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+/* title */
+#title{
+    margin:15px 0;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* buttons */
+button{
+    background:#1db954;
+    border:none;
+    color:white;
+    padding:10px 15px;
+    margin:5px;
+    border-radius:25px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1ed760;
+}
+
+/* search */
+#search{
+    width:100%;
+    padding:12px;
+    border-radius:20px;
+    border:none;
+    outline:none;
+    margin-top:10px;
+}
+
+/* playlist items */
+#playlist div{
+    background:#181818;
+    padding:10px;
+    margin:6px 0;
+    border-radius:10px;
+}
+
+#playlist div:hover{
+    background:#282828;
+}
+
+/* progress */
+#progress{
+    width:100%;
+}
+
+/* mobile spacing */
+@media(max-width:500px){
+    .container{padding:15px;}
+}
+
+</style>
+
     <br>
 <button onclick="toggleLike()" id="likeBtn">🤍 Like</button>
 
@@ -48,8 +129,24 @@ body{
 </head>
 
 <body>
+<div class="container">
 
 <h1>🎵 My Music App</h1>
+<img id="cover" src="cover1.jpg">
+<h3 id="title">Select a song</h3>
+<audio id="player" controls></audio>
+
+<!-- search -->
+<input id="search">
+
+<!-- playlist -->
+<div id="playlist"></div>
+
+<!-- buttons -->
+<button onclick="prevSong()">⏮</button>
+<button onclick="nextSong()">⏭</button>
+
+</div>
 
 <img id="cover" src="cover1.jpg">
 
