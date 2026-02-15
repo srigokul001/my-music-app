@@ -1,56 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Music App</title>
+    <title>My Music App</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+}
+
+#cover{
+    width:220px;
+    height:220px;
+    border-radius:15px;
+    margin-top:20px;
+    object-fit:cover;
+    box-shadow:0 0 20px #000;
+}
+
+.song{
+    background:#222;
+    padding:12px;
+    margin:10px auto;
+    width:260px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.song:hover{
+    background:#444;
+}
+
+.active{
+    background:#1db954;
+    color:black;
+    font-weight:bold;
+}
+</style>
 </head>
 
-<body style="text-align:center; font-family:Arial; background:#111; color:white">
+<body>
 
 <h1>🎵 My Music App</h1>
 
-<img id="cover" src="cover1.jpg" width="200" style="border-radius:15px"><br><br>
+<img id="cover" src="cover1.jpg">
 
-<h3 id="songName">Select a song</h3>
+<h2 id="title">Select a song</h2>
 
 <audio id="player" controls></audio>
 
-<br><br>
+<h3>Playlist</h3>
 
-<button onclick="prevSong()">⏮ Prev</button>
-<button onclick="nextSong()">Next ⏭</button>
-
-<br><br>
-
-<div id="list"></div>
+<div class="song" onclick="playSong(0)">Song 1</div>
+<div class="song" onclick="playSong(1)">Song 2</div>
+<div class="song" onclick="playSong(2)">Song 3</div>
 
 <script>
+
 let songs = [
- {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
- {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
- {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
+    {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
+    {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
+    {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
 ];
 
 let player = document.getElementById("player");
-let list = document.getElementById("list");
-let cover = document.getElementById("cover");
-let title = document.getElementById("title");
 
-function loadSongs(){
-  songs.forEach((song,i)=>{
-    let btn = document.createElement("button");
-    btn.innerText = song.name;
-    btn.style.margin="10px";
-    btn.onclick = ()=>{
-        player.src = song.file;      // IMPORTANT
-        player.play();               // play music
-        cover.src = song.cover;      // change image
-        title.innerText = song.name; // change title
-    };
-    list.appendChild(btn);
-  });
+function playSong(index){
+
+    player.src = songs[index].file;
+    player.play();
+
+    document.getElementById("title").innerText = songs[index].name;
+    document.getElementById("cover").src = songs[index].cover;
+
+    // highlight
+    let all = document.querySelectorAll(".song");
+    all.forEach(s => s.classList.remove("active"));
+    all[index].classList.add("active");
 }
 
-loadSongs();
 </script>
+
 </body>
 </html>
