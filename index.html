@@ -71,51 +71,25 @@ body{
 <div class="song" onclick="playSong(2)">Song 3</div>
 
 <script>
-    let progress = document.getElementById("progress");
-let currentTime = document.getElementById("current");
-let durationTime = document.getElementById("duration");
-
-// duration set
-player.onloadedmetadata = function(){
-    progress.max = Math.floor(player.duration);
-    durationTime.innerText = formatTime(player.duration);
-};
-
-// update progress while playing
-player.ontimeupdate = function(){
-    progress.value = Math.floor(player.currentTime);
-    currentTime.innerText = formatTime(player.currentTime);
-};
-
-// seek (drag pannina forward/back)
-progress.oninput = function(){
-    player.currentTime = progress.value;
-};
-
-// time format function
-function formatTime(sec){
-    sec = Math.floor(sec);
-    let min = Math.floor(sec/60);
-    let s = sec%60;
-    if(s<10) s="0"+s;
-    return min+":"+s;
-}
-
-let songs = [
-    {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
-    {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
-    {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
-];
-let current = 0;
-
 
 let player = document.getElementById("player");
 
- function playSong(index){
+let songs = [
+ {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
+ {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
+ {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
+];
+
+let current = 0;
+
+// PLAY SONG
+function playSong(index){
 
     current = index;
 
+    player.pause();
     player.src = songs[index].file;
+    player.load();
     player.play();
 
     document.getElementById("title").innerText = songs[index].name;
@@ -125,25 +99,25 @@ let player = document.getElementById("player");
     all.forEach(s => s.classList.remove("active"));
     all[index].classList.add("active");
 }
-  function nextSong(){
 
+// NEXT
+function nextSong(){
     current++;
-
-    if(current >= songs.length)
-        current = 0;
-
+    if(current >= songs.length) current = 0;
     playSong(current);
 }
- function prevSong(){
 
+// PREVIOUS
+function prevSong(){
     current--;
-
-    if(current < 0)
-        current = songs.length - 1;
-
+    if(current < 0) current = songs.length - 1;
     playSong(current);
 }
 
+// AUTO NEXT
+player.onended = function(){
+    nextSong();
+};
 </script>
 </body>
 </html>
