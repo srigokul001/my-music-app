@@ -50,6 +50,11 @@ body{
 <h2 id="title">Select a song</h2>
 
 <audio id="player" controls></audio>
+<br><br>
+
+<button onclick="prevSong()">⏮ Prev</button>
+<button onclick="nextSong()">⏭ Next</button>
+
 
 <h3>Playlist</h3>
 
@@ -64,10 +69,16 @@ let songs = [
     {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
     {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
 ];
+let current = 0;
+
 
 let player = document.getElementById("player");
 
 function playSong(index){
+
+ function playSong(index){
+
+    current = index;
 
     player.src = songs[index].file;
     player.play();
@@ -75,13 +86,34 @@ function playSong(index){
     document.getElementById("title").innerText = songs[index].name;
     document.getElementById("cover").src = songs[index].cover;
 
-    // highlight
     let all = document.querySelectorAll(".song");
     all.forEach(s => s.classList.remove("active"));
     all[index].classList.add("active");
 }
+  function nextSong(){
+
+    current++;
+
+    if(current >= songs.length)
+        current = 0;
+
+    playSong(current);
+}
+ function prevSong(){
+
+    current--;
+
+    if(current < 0)
+        current = songs.length - 1;
+
+    playSong(current);
+}
 
 </script>
+player.onended = function(){
+    nextSong();
+};
+
 
 </body>
 </html>
