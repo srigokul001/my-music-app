@@ -1,4 +1,3 @@
-<h1>My Music App 🎵</h1>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +8,26 @@
 
 <h1>🎵 My Music App</h1>
 
-<audio controls>
-    <source src="Naan Varuven Naan Varuven Adhu Vara Nenappula Kalangaadha.mp3" type="audio/mpeg">
+<select id="playlist" onchange="playSong()">
+    <option value="song.mp3">Song 1</option>
+    <option value="song2.mp3">Song 2</option>
+    <option value="song3.mp3">Song 3</option>
+</select>
+
+<br><br>
+
+<audio id="player" controls>
+    <source src="song.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+function playSong(){
+    var song = document.getElementById("playlist").value;
+    var player = document.getElementById("player");
+    player.src = song;
+    player.play();
+}
+</script>
 
 </body>
 </html>
