@@ -52,6 +52,14 @@ body{
 <audio id="player" controls></audio>
 <br><br>
 
+<input type="range" id="progress" value="0" min="0" step="1" style="width:300px">
+
+<div>
+<span id="current">0:00</span> /
+<span id="duration">0:00</span>
+</div>
+
+
 <button onclick="prevSong()">⏮ Prev</button>
 <button onclick="nextSong()">⏭ Next</button>
 
@@ -63,7 +71,38 @@ body{
 <div class="song" onclick="playSong(2)">Song 3</div>
 
 <script>
+    let progress = document.getElementById("progress");
+let currentTime = document.getElementById("current");
+let durationTime = document.getElementById("duration");
 
+// duration set
+player.onloadedmetadata = function(){
+    progress.max = Math.floor(player.duration);
+    durationTime.innerText = formatTime(player.duration);
+};
+
+// update progress while playing
+player.ontimeupdate = function(){
+    progress.value = Math.floor(player.currentTime);
+    currentTime.innerText = formatTime(player.currentTime);
+};
+
+// seek (drag pannina forward/back)
+progress.oninput = function(){
+    player.currentTime = progress.value;
+};
+
+// time format function
+function formatTime(sec){
+    sec = Math.floor(sec);
+    let min = Math.floor(sec/60);
+    let s = sec%60;
+    if(s<10) s="0"+s;
+    return min+":"+s;
+}
+
+player.onended = function(){
+    nextSong();
 let songs = [
     {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
     {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
@@ -108,10 +147,5 @@ let player = document.getElementById("player");
 }
 
 </script>
-player.onended = function(){
-    nextSong();
-};
-
-
 </body>
 </html>
