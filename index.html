@@ -51,7 +51,7 @@ body{
 
 <audio id="player" controls></audio>
 <br><br>
-
+<button id="playBtn">▶ Play</button>
 <input type="range" id="progress" value="0" min="0" step="1" style="width:300px">
 <div id="time">0:00 / 0:00</div>
 <div>
@@ -146,6 +146,22 @@ function format(sec){
     if(s<10) s="0"+s;
     return m+":"+s;
 }
+let playBtn = document.getElementById("playBtn");
+
+playBtn.onclick = function(){
+    if(player.paused){
+        player.play();
+        playBtn.innerText = "⏸ Pause";
+    }else{
+        player.pause();
+        playBtn.innerText = "▶ Play";
+    }
+};
+
+// song play aana button change
+player.onplay = () => playBtn.innerText="⏸ Pause";
+player.onpause = () => playBtn.innerText="▶ Play";
+
 
 </script>
 </body>
