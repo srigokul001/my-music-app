@@ -51,6 +51,11 @@ body{
 
 <audio id="player" controls></audio>
 <br><br>
+
+<input type="text" id="search" placeholder="Search song..." onkeyup="filterSongs()" style="padding:8px;width:200px">
+
+<div id="playlist" style="margin-top:20px"></div>
+
 <button id="playBtn">▶ Play</button>
 <button id="shuffleBtn">🔀 Shuffle Off</button>
 <button id="repeatBtn">🔁 Repeat Off</button>
@@ -205,6 +210,31 @@ repeatBtn.onclick = function(){
         repeatBtn.innerText = "🔁 Repeat Off";
     }
 };
+let playlist = document.getElementById("playlist");
+
+// create list
+function renderSongs(list){
+    playlist.innerHTML = "";
+    list.forEach((song,index)=>{
+        let div = document.createElement("div");
+        div.innerText = song.name;
+        div.style.cursor="pointer";
+        div.style.margin="8px";
+        div.onclick = ()=> playSong(index);
+        playlist.appendChild(div);
+    });
+}
+
+// search filter
+function filterSongs(){
+    let text = document.getElementById("search").value.toLowerCase();
+    let filtered = songs.filter(s => s.name.toLowerCase().includes(text));
+    renderSongs(filtered);
+}
+
+// first load
+renderSongs(songs);
+
 
 
 
