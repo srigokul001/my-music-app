@@ -247,18 +247,39 @@ function toggleRepeat(){
 }
 
 /* AUTO NEXT UPDATE */
-player.onended = function(){
+function nextSong(){
+
   if(isRepeat){
     playSong(current);
+    return;
   }
-  else if(isShuffle){
+
+  if(isShuffle){
     let r = Math.floor(Math.random()*songs.length);
     playSong(r);
+    return;
   }
-  else{
-    nextSong();
+
+  current++;
+  if(current >= songs.length) current = 0;
+  playSong(current);
+}
+function prevSong(){
+
+  if(isShuffle){
+    let r = Math.floor(Math.random()*songs.length);
+    playSong(r);
+    return;
   }
+
+  current--;
+  if(current < 0) current = songs.length-1;
+  playSong(current);
+}
+player.onended = function(){
+  nextSong();
 };
+
 
 
 
