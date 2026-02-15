@@ -2,6 +2,12 @@
 <html>
 <head>
     <title>My Music App</title>
+    <br>
+<button onclick="toggleLike()" id="likeBtn">🤍 Like</button>
+
+<h3>💚 Favourites</h3>
+<div id="favList"></div>
+
 
 <style>
 body{
@@ -277,6 +283,64 @@ function format(sec){
     if(s<10) s="0"+s;
     return m+":"+s;
 }
+let favList = document.getElementById("favList");
+let likeBtn = document.getElementById("likeBtn");
+
+let favourites = JSON.parse(localStorage.getItem("favs")) || [];
+
+// play song modify (IMPORTANT — existing function replace)
+function playSong(i){
+    current = i;
+    player.src = songs[i].file;
+    player.load();
+    player.play();
+
+    title.innerText = songs[i].name;
+    cover.src = songs[i].cover;
+
+    updateLikeBtn();
+}
+
+// like toggle
+function toggleLike(){
+    let songName = songs[current].name;
+
+    if(favourites.includes(songName)){
+        favourites = favourites.filter(s => s !== songName);
+    }else{
+        favourites.push(songName);
+    }
+
+    localStorage.setItem("favs", JSON.stringify(favourites));
+    updateLikeBtn();
+    renderFavs();
+}
+
+// change button icon
+function updateLikeBtn(){
+    if(favourites.includes(songs[current].name))
+        likeBtn.innerText = "💚 Liked";
+    else
+        likeBtn.innerText = "🤍 Like";
+}
+
+// show favourites list
+function renderFavs(){
+    favList.innerHTML = "";
+    favourites.forEach(name=>{
+        let div = document.createElement("div");
+        div.innerText = name;
+        div.style.cursor="pointer";
+        div.onclick = ()=>{
+            let index = songs.findIndex(s=>s.name===name);
+            if(index>=0) playSong(index);
+        };
+        favList.appendChild(div);
+    });
+}
+
+// first load
+renderFavs();
 
 
 
