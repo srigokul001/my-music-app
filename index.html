@@ -62,6 +62,8 @@ body{
 
 <button onclick="prevSong()">⏮ Prev</button>
 <button onclick="nextSong()">⏭ Next</button>
+<input type="range" id="progress" value="0" min="0" max="100">
+<div id="time">0:00 / 0:00</div>
 
 
 <h3>Playlist</h3>
@@ -118,6 +120,41 @@ function prevSong(){
 player.onended = function(){
     nextSong();
 };
+let progress = document.getElementById("progress");
+let time = document.getElementById("time");
+
+// duration load aana apram
+player.onloadedmetadata = function(){
+    progress.max = Math.floor(player.duration);
+    updateTime();
+};
+
+// song odumbothu bar move
+player.ontimeupdate = function(){
+    progress.value = Math.floor(player.currentTime);
+    updateTime();
+};
+
+// drag pannina seek
+progress.oninput = function(){
+    player.currentTime = progress.value;
+};
+
+// time format
+function updateTime(){
+    let cur = format(player.currentTime);
+    let dur = format(player.duration);
+    time.innerText = cur + " / " + dur;
+}
+
+function format(sec){
+    if(!sec) return "0:00";
+    let m = Math.floor(sec/60);
+    let s = Math.floor(sec%60);
+    if(s<10) s="0"+s;
+    return m+":"+s;
+}
+
 </script>
 </body>
 </html>
