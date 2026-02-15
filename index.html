@@ -53,6 +53,7 @@ body{
 <br><br>
 <button id="playBtn">▶ Play</button>
 <button id="shuffleBtn">🔀 Shuffle Off</button>
+<button id="repeatBtn">🔁 Repeat Off</button>
 <input type="range" id="progress" value="0" min="0" step="1" style="width:300px">
 <div id="time">0:00 / 0:00</div>
 <div>
@@ -72,7 +73,10 @@ let player = document.getElementById("player");
 let songs = [
  {name:"Song 1", file:"song1.mp3", cover:"cover1.jpg"},
  {name:"Song 2", file:"song2.mp3", cover:"cover2.jpg"},
- {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"}
+ {name:"Song 3", file:"song3.mp3", cover:"cover3.jpg"},
+ {name:"Song 4", file:"song4.mp3", cover:"cover4.jpg"},
+ {name:"Song 5", file:"song5.mp3", cover:"cover5.jpg"},
+ {name:"Song 6", file:"song6.mp3", cover:"cover6.jpg"}
 ];
 
 let current = 0;
@@ -116,10 +120,15 @@ function prevSong(){
 
 // AUTO NEXT
 player.onended = function(){
-    nextSong();
+
+    if(repeat){
+        playSong(current);   // same song again
+    }else{
+        nextSong();          // next / shuffle logic
+    }
+
 };
-let progress = document.getElementById("progress");
-let time = document.getElementById("time");
+
 
 // duration load aana apram
 player.onloadedmetadata = function(){
@@ -179,6 +188,19 @@ shuffleBtn.onclick = function(){
         shuffleBtn.innerText = "🔀 Shuffle Off";
     }
 };
+let repeat = false;
+let repeatBtn = document.getElementById("repeatBtn");
+
+repeatBtn.onclick = function(){
+    repeat = !repeat;
+
+    if(repeat){
+        repeatBtn.innerText = "🔁 Repeat On";
+    }else{
+        repeatBtn.innerText = "🔁 Repeat Off";
+    }
+};
+
 
 
 
