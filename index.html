@@ -132,6 +132,8 @@ body{
 <div class="container">
 
 <h1>🎵 My Music App</h1>
+<h3>📜 Lyrics</h3>
+<div id="lyrics" style="height:150px; overflow:auto; background:#181818; padding:10px; border-radius:10px;"></div>
 <img id="cover" src="cover1.jpg">
 <h3 id="title">Select a song</h3>
 <audio id="player" controls></audio>
@@ -182,6 +184,23 @@ let songs = [
 
 
 let current = 0;
+let lyricsData = {
+  "Song 1": `
+  line 1 lyrics...
+  line 2 lyrics...
+  line 3 lyrics...
+  `,
+
+  "Song 2": `
+  another lyrics here...
+  more lines...
+  `,
+
+  "Song 3": `
+  your lyrics...
+  `
+};
+
 
 // PLAY SONG
 function playSong(index){
@@ -202,6 +221,9 @@ function playSong(index){
      localStorage.setItem("lastSong", index);
     document.body.style.background =
 "linear-gradient(135deg,#1db954,#191414)";
+let lyr = lyricsData[songs[index].name] || "No lyrics available";
+document.getElementById("lyrics").innerText = lyr;
+
 }
 
 // NEXT
