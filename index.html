@@ -184,47 +184,13 @@ let songs = [
 
 
 let current = 0;
-let lyricsData = {
-  "Song 1": `
-  line 1 lyrics...
-  line 2 lyrics...
-  line 3 lyrics...
-  `,
-
-  "Song 2": `
-  another lyrics here...
-  more lines...
-  `,
-
-  "Song 3": `
-  your lyrics...
-  `
-};
 
 
-// PLAY SONG
-function playSong(index){
 
-    current = index;
 
-    player.pause();
-    player.src = songs[index].file;
-    player.load();
-    player.play();
 
-    document.getElementById("title").innerText = songs[index].name;
-    document.getElementById("cover").src = songs[index].cover;
 
-    let all = document.querySelectorAll(".song");
-    all.forEach(s => s.classList.remove("active"));
-    all[index].classList.add("active");
-     localStorage.setItem("lastSong", index);
-    document.body.style.background =
-"linear-gradient(135deg,#1db954,#191414)";
-let lyr = lyricsData[songs[index].name] || "No lyrics available";
-document.getElementById("lyrics").innerText = lyr;
 
-}
 
 // NEXT
 function nextSong(){
