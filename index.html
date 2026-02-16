@@ -475,7 +475,9 @@ function loadLyrics(file){
   let box = document.getElementById("lyrics");
   box.innerText = "Loading lyrics...";
 
-  fetch(file)
+  let url = window.location.origin + "/my-music-app/" + file;
+
+  fetch(url)
   .then(res => res.text())
   .then(text=>{
       box.innerText = text;
@@ -485,6 +487,9 @@ function loadLyrics(file){
   });
 
 }
+
+
+
 
 
 
