@@ -456,6 +456,8 @@ function playSong(i){
     cover.src = songs[i].cover;
 
     updateLikeBtn();
+    loadLyrics(songs[i].file.replace(".mp3",".txt"));
+
 }
 
 // like toggle
@@ -518,6 +520,21 @@ document.addEventListener("keydown", function(e){
 let saved = localStorage.getItem("lastSong");
 if(saved !== null){
     playSong(parseInt(saved));
+}
+function loadLyrics(file){
+
+  let box = document.getElementById("lyrics");
+  box.innerText = "Loading lyrics...";
+
+  fetch(file)
+  .then(res => res.text())
+  .then(text=>{
+      box.innerText = text;
+  })
+  .catch(()=>{
+      box.innerText = "Lyrics not available";
+  });
+
 }
 
 
