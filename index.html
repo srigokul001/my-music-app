@@ -171,6 +171,10 @@ body{
 <script>
 
 let player = document.getElementById("player");
+let title = document.getElementById("title");
+let cover = document.getElementById("cover");
+let playlist = document.getElementById("playlist");
+let search = document.getElementById("search");
 
 
 let songs = [
@@ -348,7 +352,6 @@ repeatBtn.onclick = function(){
         repeatBtn.innerText = "🔁 Repeat Off";
     }
 };
-let playlist = document.getElementById("playlist");
 
 // create list
 function renderSongs(list){
