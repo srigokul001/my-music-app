@@ -3,6 +3,96 @@
 <head>
     <title>My Music App</title>
     <style>
+        .app{
+  display:flex;
+  height:100vh;
+  background:#121212;
+  color:white;
+  font-family:Arial;
+}
+
+.sidebar{
+  width:220px;
+  background:#000;
+  padding:20px;
+}
+
+.sidebar ul{
+  list-style:none;
+  padding:0;
+}
+
+.sidebar li{
+  margin:10px 0;
+  cursor:pointer;
+}
+
+.main{
+  flex:1;
+  padding:20px;
+  overflow:auto;
+}
+
+.album-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:20px;
+}
+
+.album{
+  background:#181818;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.album img{
+  width:100%;
+  border-radius:10px;
+}
+
+.album:hover{
+  background:#282828;
+}
+
+.player-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:80px;
+  background:#181818;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 20px;
+}
+
+.player-left{
+  display:flex;
+  align-items:center;
+}
+
+.player-left img{
+  width:60px;
+  height:60px;
+  border-radius:8px;
+  margin-right:10px;
+}
+
+.player-center button{
+  margin:0 10px;
+  background:#1db954;
+  border:none;
+  padding:10px 15px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.player-right input{
+  width:100px;
+}
 
 body{
     margin:0;
@@ -129,30 +219,84 @@ body{
 </head>
 
 <body>
-<div class="container">
 
-<h1>🎵 My Music App</h1>
-<h3>📜 Lyrics</h3>
-<div id="lyrics" style="height:150px; overflow:auto; background:#181818; padding:10px; border-radius:10px;"></div>
-<img id="cover" src="cover1.jpg">
-<h3 id="title">Select a song</h3>
-<audio id="player" controls></audio>
-<br><br>
-🔊 Volume
-<input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>🎵 MySpotify</h2>
+    <ul>
+      <li>🏠 Home</li>
+      <li>🔍 Search</li>
+      <li>📚 Library</li>
+    </ul>
+
+    <hr>
+
+    <h4>Your Playlists</h4>
+    <ul id="userPlaylists">
+      <li>❤️ Liked Songs</li>
+      <li>🎧 Tamil Hits</li>
+    </ul>
+  </div>
 
 
-<!-- search -->
-<input id="search">
+  <!-- MAIN CONTENT -->
+  <div class="main">
 
-<!-- playlist -->
-<div id="playlist"></div>
+    <h1>Good Evening</h1>
 
-<!-- buttons -->
-<button onclick="prevSong()">⏮</button>
-<button onclick="nextSong()">⏭</button>
+    <div class="album-grid">
+      <div class="album">
+        <img src="cover1.jpg">
+        <p>Song 1</p>
+      </div>
+
+      <div class="album">
+        <img src="cover2.jpg">
+        <p>Song 2</p>
+      </div>
+
+      <div class="album">
+        <img src="cover3.jpg">
+        <p>Song 3</p>
+      </div>
+
+      <div class="album">
+        <img src="cover4.jpg">
+        <p>Song 4</p>
+      </div>
+    </div>
+
+  </div>
 
 </div>
+
+
+<!-- BOTTOM PLAYER -->
+<div class="player-bar">
+
+  <div class="player-left">
+    <img id="cover" src="cover1.jpg">
+    <div>
+      <div id="title">Select a song</div>
+    </div>
+  </div>
+
+  <div class="player-center">
+    <button onclick="prevSong()">⏮</button>
+    <button onclick="togglePlay()" id="playBtn">▶</button>
+    <button onclick="nextSong()">⏭</button>
+  </div>
+
+  <div class="player-right">
+    🔊 <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <audio id="player"></audio>
+
+</div>
+
 </body>
 <button onclick="togglePlay()" id="playBtn">▶ Play</button>
 
