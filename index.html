@@ -170,6 +170,41 @@ button:hover{
 @media(max-width:500px){
     .container{padding:15px;}
 }
+.album{
+  position:relative;
+  background:#181818;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.play-hover{
+  position:absolute;
+  bottom:60px;
+  right:20px;
+  background:#1db954;
+  border:none;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  color:black;
+  font-size:18px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.album:hover .play-hover{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.play-hover:hover{
+  transform:scale(1.1);
+}
 
 </style>
 
@@ -248,34 +283,39 @@ body{
 
     <div class="album" onclick="playSong(0)">
   <img src="cover1.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 1</p>
 </div>
 
 <div class="album" onclick="playSong(1)">
   <img src="cover2.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 2</p>
 </div>
 
 <div class="album" onclick="playSong(2)">
   <img src="cover3.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 3</p>
 </div>
 
 <div class="album" onclick="playSong(3)">
   <img src="cover4.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 4</p>
 </div>
 
 <div class="album" onclick="playSong(4)">
   <img src="cover5.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 5</p>
 </div>
 
 <div class="album" onclick="playSong(5)">
   <img src="cover6.jpg">
+  <button class="play-hover">▶</button>
   <p>Song 6</p>
 </div>
-      </div>
     </div>
 
   </div>
