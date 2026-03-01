@@ -362,6 +362,7 @@ body{
 <!-- BOTTOM PLAYER -->
 
 </div>
+<audio id="player"></audio>
 
 </body>
 <button onclick="togglePlay()" id="playBtn" class="control big">
@@ -451,24 +452,8 @@ function toggleRepeat(){
     isRepeat ? "🔁 Repeat On" : "🔁 Repeat Off";
 }
 
-/* AUTO NEXT UPDATE */
-function nextSong(){
 
-  if(isRepeat){
-    playSong(current);
-    return;
-  }
 
-  if(isShuffle){
-    let r = Math.floor(Math.random()*songs.length);
-    playSong(r);
-    return;
-  }
-
-  current++;
-  if(current >= songs.length) current = 0;
-  playSong(current);
-}
 function prevSong(){
 
   if(isShuffle){
