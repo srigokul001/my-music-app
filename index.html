@@ -242,6 +242,30 @@ button:hover{
   transform:scale(1.1);
   background:#1ed760;
 }
+.player-center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:40%;
+}
+
+.controls{
+  display:flex;
+  gap:20px;
+  margin-bottom:5px;
+}
+
+.progress-container{
+  display:flex;
+  align-items:center;
+  width:100%;
+  gap:10px;
+}
+
+#progressBar{
+  flex:1;
+  cursor:pointer;
+}
 
 </style>
 
@@ -362,19 +386,21 @@ body{
 
 <!-- BOTTOM PLAYER -->
 
+<div class="player-center">
+
+  <div class="controls">
+    <button onclick="prevSong()">⏮</button>
+    <button onclick="togglePlay()" id="playBtn">▶</button>
+    <button onclick="nextSong()">⏭</button>
+  </div>
+
+  <div class="progress-container">
+    <span id="currentTime">0:00</span>
+    <input type="range" id="progressBar" value="0" min="0" max="100">
+    <span id="totalTime">0:00</span>
+  </div>
+
 </div>
-<audio id="player"></audio>
-
-</body>
-<button onclick="togglePlay()" id="playBtn" class="control big">
-  ▶
-</button>
-
-<button onclick="toggleShuffle()" id="shuffleBtn">🔀 Shuffle Off</button>
-
-<button onclick="toggleRepeat()" id="repeatBtn">🔁 Repeat Off</button>
-
-
  
 <script>
 
@@ -679,6 +705,34 @@ function loadLyrics(file){
   .catch(()=>{
       box.innerText = "Lyrics not available";
   });
+}
+let progressBar = document.getElementById("progressBar");
+let currentTimeEl = document.getElementById("currentTime");
+let totalTimeEl = document.getElementById("totalTime");
+
+// duration load aana
+player.onloadedmetadata = function(){
+  totalTimeEl.innerText = formatTime(player.duration);
+};
+
+// song play aagumbothu update
+player.ontimeupdate = function(){
+  progressBar.value = (player.currentTime / player.duration) * 100;
+  currentTimeEl.innerText = formatTime(player.currentTime);
+};
+
+// drag panna seek
+progressBar.oninput = function(){
+  player.currentTime = (progressBar.value / 100) * player.duration;
+};
+
+// time format
+function formatTime(sec){
+  if(!sec) return "0:00";
+  let m = Math.floor(sec/60);
+  let s = Math.floor(sec%60);
+  if(s < 10) s = "0" + s;
+  return m + ":" + s;
 }
 </script>
 </body>
