@@ -246,25 +246,35 @@ body{
 
     <h1>Good Evening</h1>
 
-    <div class="album-grid">
-      <div class="album">
-        <img src="cover1.jpg">
-        <p>Song 1</p>
-      </div>
+    <div class="album" onclick="playSong(0)">
+  <img src="cover1.jpg">
+  <p>Song 1</p>
+</div>
 
-      <div class="album">
-        <img src="cover2.jpg">
-        <p>Song 2</p>
-      </div>
+<div class="album" onclick="playSong(1)">
+  <img src="cover2.jpg">
+  <p>Song 2</p>
+</div>
 
-      <div class="album">
-        <img src="cover3.jpg">
-        <p>Song 3</p>
-      </div>
+<div class="album" onclick="playSong(2)">
+  <img src="cover3.jpg">
+  <p>Song 3</p>
+</div>
 
-      <div class="album">
-        <img src="cover4.jpg">
-        <p>Song 4</p>
+<div class="album" onclick="playSong(3)">
+  <img src="cover4.jpg">
+  <p>Song 4</p>
+</div>
+
+<div class="album" onclick="playSong(4)">
+  <img src="cover5.jpg">
+  <p>Song 5</p>
+</div>
+
+<div class="album" onclick="playSong(5)">
+  <img src="cover6.jpg">
+  <p>Song 6</p>
+</div>
       </div>
     </div>
 
@@ -631,19 +641,7 @@ function loadLyrics(file){
   .catch(()=>{
       box.innerText = "Lyrics not available";
   });
-
 }
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>
