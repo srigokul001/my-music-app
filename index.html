@@ -318,39 +318,38 @@ body{
 
     <h1>Good Evening</h1>
 
-    <div class="album" onclick="playSong(0)">
+    <div class="album">
   <img src="cover1.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(0)">▶</button>
   <p>Song 1</p>
 </div>
-
-<div class="album" onclick="playSong(1)">
+<div class="album">
   <img src="cover2.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(1)">▶</button>
   <p>Song 2</p>
 </div>
 
-<div class="album" onclick="playSong(2)">
+<div class="album">
   <img src="cover3.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(2)">▶</button>
   <p>Song 3</p>
 </div>
 
-<div class="album" onclick="playSong(3)">
+<div class="album">
   <img src="cover4.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(3)">▶</button>
   <p>Song 4</p>
 </div>
 
-<div class="album" onclick="playSong(4)">
+<div class="album">
   <img src="cover5.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(4)">▶</button>
   <p>Song 5</p>
 </div>
 
-<div class="album" onclick="playSong(5)">
+<div class="album">
   <img src="cover6.jpg">
-  <button class="play-hover">▶</button>
+  <button class="play-overlay" onclick="playSong(5)">▶</button>
   <p>Song 6</p>
 </div>
     </div>
@@ -365,7 +364,9 @@ body{
 </div>
 
 </body>
-<button onclick="togglePlay()" id="playBtn">▶ Play</button>
+<button onclick="togglePlay()" id="playBtn" class="control big">
+  ▶
+</button>
 
 <button onclick="toggleShuffle()" id="shuffleBtn">🔀 Shuffle Off</button>
 
