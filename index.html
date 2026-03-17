@@ -126,8 +126,13 @@ body{
 </head>
 
 <body>
-
-<div class="app">
+<div id="loginBox" style="text-align:center; margin-top:100px;">
+  <h2>Login</h2>
+  <input id="username" placeholder="Username"><br><br>
+  <input id="password" type="password" placeholder="Password"><br><br>
+  <button onclick="login()">Login</button>
+</div>
+  <div class="app" id="app" style="display:none;"></div>
 
 <!-- sidebar -->
 <div class="sidebar">
@@ -335,6 +340,28 @@ function addToPlaylist(){
   localStorage.setItem("playlists", JSON.stringify(playlists));
 
   alert("Added!");
+}
+function login(){
+
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if(user === "" || pass === ""){
+    alert("Enter details");
+    return;
+  }
+
+  // save user
+  localStorage.setItem("user", user);
+
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("app").style.display="flex";
+}
+let savedUser = localStorage.getItem("user");
+
+if(savedUser){
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("app").style.display="flex";
 }
 
 </script>
