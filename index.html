@@ -136,6 +136,13 @@ body{
 <li>Search</li>
 <li>Library</li>
 </div>
+<h3>📂 Playlists</h3>
+
+<input type="text" id="newPlaylist" placeholder="New playlist name">
+
+<button onclick="createPlaylist()">Create</button>
+<button onclick="addToPlaylist()">➕ Add to Playlist</button>
+<div id="playlistContainer"></div>
 
 <!-- main -->
 <div class="main">
@@ -241,6 +248,7 @@ player.play();
 
 title.innerText=songs[i].name;
 cover.src=songs[i].cover;
+window.currentSongName = songs[i].name;
 }
 
 /* controls */
@@ -281,6 +289,53 @@ player.volume=volume.value;
 /* rotate */
 player.onplay=()=>cover.classList.add("rotate");
 player.onpause=()=>cover.classList.remove("rotate");
+
+
+let playlists = JSON.parse(localStorage.getItem("playlists")) || {};
+
+function createPlaylist(){
+  let name = document.getElementById("newPlaylist").value;
+
+  if(!name) return alert("Enter name");
+
+  playlists[name] = [];
+  localStorage.setItem("playlists", JSON.stringify(playlists));
+
+  renderPlaylists();
+}
+
+function renderPlaylists(){
+  let box = document.getElementById("playlistContainer");
+  box.innerHTML = "";
+
+  for(let p in playlists){
+    let div = document.createElement("div");
+    div.innerText = p;
+    div.style.cursor="pointer";
+    div.onclick = ()=> showPlaylist(p);
+    box.appendChild(div);
+  }
+}
+
+function showPlaylist(name){
+  let list = playlists[name];
+  alert(name + " contains " + list.length + " songs");
+}
+
+renderPlaylists();
+
+function addToPlaylist(){
+
+  let name = prompt("Enter playlist name");
+
+  if(!playlists[name]) return alert("Playlist not found");
+
+  playlists[name].push(currentSongName);
+
+  localStorage.setItem("playlists", JSON.stringify(playlists));
+
+  alert("Added!");
+}
 
 </script>
 
