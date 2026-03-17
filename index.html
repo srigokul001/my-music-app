@@ -4,19 +4,25 @@
 <title>My Spotify</title>
 
 <style>
-
+#loginBox{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#121212;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+}
 /* layout */
 body{
   margin:0;
   font-family:Arial;
   background:#121212;
   color:white;
-}
-#loginBox{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
 }
 .app{
   display:flex;
