@@ -194,7 +194,7 @@
       <div class="login-field"><label>PASSWORD</label><input id="upass" type="password" placeholder="Enter your password"></div>
     </div>
     <button class="login-btn" onclick="doLogin()">Log In</button>
-    <p class="login-footer">Don't have an account? <span>Sign up</span></p>
+    <p class="login-footer">Don't have an account? <span onclick="showRegisterForm()">Sign up</span></p>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -434,21 +434,14 @@
   async function doLogin() {
   let user = document.getElementById("uname").value;
   let pass = document.getElementById("upass").value;
-
-  if(user === "" || pass === "") {
-    alert("Enter details");
-    return;
-  }
-
+  if(user === "" || pass === "") { alert("Enter details"); return; }
   try {
     const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: user, password: pass })
     });
-
     const data = await response.json();
-
     if(data.token) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", data.username);
@@ -462,7 +455,40 @@
     alert("Server not running!");
   }
 }
-  let lightMode=false;
+
+async function doRegister() {
+  let user = document.getElementById("uname").value;
+  let pass = document.getElementById("upass").value;
+  if(user === "" || pass === "") { alert("Enter details"); return; }
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: user, password: pass })
+    });
+    const data = await response.json();
+    alert(data.message);
+    if(data.message.includes("successfully")) { showLoginForm(); }
+  } catch(err) {
+    alert("Server not running!");
+  }
+}
+
+function showRegisterForm() {
+  document.querySelector(".login-card h2").textContent = "Sign up to MySpotify";
+  document.querySelector(".login-btn").textContent = "Sign Up";
+  document.querySelector(".login-btn").setAttribute("onclick", "doRegister()");
+  document.querySelector(".login-footer").innerHTML = 
+    'Already have an account? <span onclick="showLoginForm()">Log in</span>';
+}
+
+function showLoginForm() {
+  document.querySelector(".login-card h2").textContent = "Log in to MySpotify";
+  document.querySelector(".login-btn").textContent = "Log In";
+  document.querySelector(".login-btn").setAttribute("onclick", "doLogin()");
+  document.querySelector(".login-footer").innerHTML = 
+    'Don\'t have an account? <span onclick="showRegisterForm()">Sign up</span>';
+}
   function toggleTheme(){
     lightMode=!lightMode;
     document.body.classList.toggle("light",lightMode);
