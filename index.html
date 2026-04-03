@@ -240,7 +240,7 @@
           <input id="searchInput" placeholder="Search songs..." oninput="filterSongs()" />
         </div>
         <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
-        <div class="user-chip"><div class="user-dot"></div><span id="userLabel">User</span></div>
+        <div class="user-chip"><div class="user-dot"></div><span id="userLabel">User</span><span onclick="doLogout()" style="margin-left:8px;cursor:pointer;color:#ff5050;font-size:11px;">⏻</span></div>
       </div>
       <div class="section-header">
         <h2>All Songs</h2>
@@ -612,6 +612,15 @@ function showLoginForm() {
   function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2500); }
   renderPlaylists();
 renderGrid(songs); 
+function doLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  document.getElementById("app").style.display = "none";
+  document.getElementById("loginOverlay").style.display = "flex";
+  document.getElementById("uname").value = "";
+  document.getElementById("upass").value = "";
+  showLoginForm();
+}
 </script>
 </body>
 </html>
