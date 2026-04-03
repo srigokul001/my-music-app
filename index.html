@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&display=swap');
-
   :root {
     --bg: #0a0a0a; --sidebar-bg: #111; --card-bg: #181818;
     --card-hover: #282828; --accent: #1db954; --text: #fff;
     --text-muted: #a7a7a7; --text-dim: #6a6a6a; --border: #2a2a2a;
-    --player-bg: #121212; --input-bg: #2a2a2a; --tag-bg: #232323;
+    --player-bg: #121212; --input-bg: #161616; --tag-bg: #232323;
   }
   .light {
     --bg: #f0f0f0; --sidebar-bg: #e0e0e0; --card-bg: #fff;
@@ -23,7 +22,6 @@
     color: var(--text); height: 100vh; overflow: hidden;
     display: flex; flex-direction: column; transition: background 0.3s, color 0.3s;
   }
-
   /* LOGIN */
   #loginOverlay {
     position: fixed; inset: 0; background: #0a0a0a;
@@ -44,10 +42,8 @@
   .login-btn:hover { background: #1ed760; transform: scale(1.02); }
   .login-footer { color: #6a6a6a; font-size: 12px; }
   .login-footer span { color: var(--accent); cursor: pointer; }
-
   #app { display: none; flex: 1; overflow: hidden; }
   .app-body { display: flex; flex: 1; height: calc(100vh - 72px); overflow: hidden; }
-
   /* SIDEBAR */
   .sidebar { width: 240px; background: var(--sidebar-bg); padding: 20px 16px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; border-right: 1px solid var(--border); transition: background 0.3s; }
   .sidebar-logo { font-size: 18px; font-weight: 900; color: var(--text); }
@@ -66,7 +62,6 @@
   .playlist-songs-list { padding: 4px 10px 8px 22px; display: flex; flex-direction: column; gap: 4px; }
   .playlist-song-item { font-size: 12px; color: var(--text-dim); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
   .playlist-song-item::before { content: '♪'; color: var(--accent); font-size: 10px; }
-
   /* MAIN */
   .main { flex: 1; overflow-y: auto; background: var(--bg); transition: background 0.3s; }
   .main-header { position: sticky; top: 0; z-index: 10; background: linear-gradient(180deg, var(--bg) 80%, transparent); padding: 20px 24px 12px; display: flex; align-items: center; gap: 16px; }
@@ -100,7 +95,6 @@
   .add-playlist-btn:hover { color: var(--accent); }
   .no-results { padding: 60px 24px; text-align: center; color: var(--text-dim); font-size: 15px; }
   .no-results span { font-size: 40px; display: block; margin-bottom: 12px; }
-
   /* EQUALIZER */
   #equalizerCanvas {
     position: fixed; bottom: 72px; left: 0; right: 0;
@@ -108,7 +102,6 @@
     opacity: 0; transition: opacity 0.5s;
   }
   #equalizerCanvas.active { opacity: 1; }
-
   /* LYRICS PANEL */
   .lyrics-panel {
     position: fixed; right: 0; top: 0; bottom: 72px;
@@ -141,7 +134,6 @@
   .lyrics-line.active { color: var(--text); font-size: 17px; font-weight: 700; }
   .lyrics-line:hover { color: var(--text-muted); }
   .lyrics-empty { color: var(--text-dim); font-size: 13px; text-align: center; margin-top: 40px; }
-
   /* PLAYER BAR */
   .player-bar { height: 72px; background: var(--player-bg); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; gap: 20px; transform: translateY(100%); opacity: 0; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s; }
   .player-bar.visible { transform: translateY(0); opacity: 1; }
@@ -170,7 +162,6 @@
   input[type=range].vol-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--text); }
   .lyrics-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.2s; white-space: nowrap; }
   .lyrics-btn:hover, .lyrics-btn.active { border-color: var(--accent); color: var(--accent); }
-
   /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 5000; }
   .modal-overlay.open { display: flex; }
@@ -181,11 +172,9 @@
   .modal-pl-item:hover { background: #383838; color: var(--text); }
   .modal-cancel { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 10px; cursor: pointer; font-size: 13px; font-family: 'Figtree', sans-serif; transition: all 0.2s; }
   .modal-cancel:hover { border-color: var(--text); color: var(--text); }
-
   /* TOAST */
   .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--accent); color: #000; padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; opacity: 0; transition: all 0.3s; z-index: 4000; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
   @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
   @keyframes fadeUp  { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes spin    { from { transform: rotate(0); } to { transform: rotate(360deg); } }
@@ -196,7 +185,6 @@
 </style>
 </head>
 <body>
-
 <div id="loginOverlay">
   <div class="login-card">
     <div class="login-logo">🎵</div>
@@ -209,9 +197,7 @@
     <p class="login-footer">Don't have an account? <span>Sign up</span></p>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <!-- LYRICS PANEL -->
 <div class="lyrics-panel" id="lyricsPanel">
   <div class="lyrics-header">
@@ -229,7 +215,6 @@
     <div class="lyrics-empty">Song select pannு da!</div>
   </div>
 </div>
-
 <div id="app" style="display:none;flex-direction:column;height:100vh;">
   <div class="app-body">
     <div class="sidebar">
@@ -248,7 +233,6 @@
         <div class="playlist-list" id="playlistList"></div>
       </div>
     </div>
-
     <div class="main">
       <div class="main-header">
         <div class="search-wrap">
@@ -266,10 +250,8 @@
       <div class="no-results" id="noResults" style="display:none;"><span>🎵</span>Illa da, results kidaikala!</div>
     </div>
   </div>
-
   <!-- EQUALIZER CANVAS -->
   <canvas id="equalizerCanvas"></canvas>
-
   <div class="player-bar" id="playerBar">
     <div class="player-left">
       <div class="player-thumb" id="playerThumb">🎵</div>
@@ -307,15 +289,13 @@
     <button class="modal-cancel" onclick="closeModal()">Cancel</button>
   </div>
 </div>
-
 <audio id="audioPlayer"></audio>
-
 <script>
   // ── SONGS — lyrics array-la unoda songs lyrics add panniko ──
   const songs = [
     {
       name: "neelothi", artist: "Sid Sriram", emoji: "🌧️",
-      file: "song1.mp3", cover: "covers/cover1.jpg",
+      file: "song1.mp3", cover: "cover1.jpg",
       lyrics: [
         "Mazhai kuruvi...", "Konjam paesu...", "Ennai paarthu sirikiraai...",
         "Vaanam muzhuthum...", "Nee thaan endhan...", "Kanavugal ellam nee..."
@@ -323,7 +303,7 @@
     },
     {
       name: "oru pere varalaru", artist: "D. Imman", emoji: "🧡",
-      file: "song2.mp3", cover: "covers/cover2.jpg",
+      file: "song2.mp3", cover: "cover2.jpg",
       lyrics: [
         "Kannaana kanney...", "Kaigal nீtti...", "Thambiku...",
         "Oru vaazhkai...", "Nee irundhal...", "Sugame sugam..."
@@ -331,7 +311,7 @@
     },
     {
       name: "pattuma", artist: "Anirudh", emoji: "🔥",
-      file: "song3.mp3", cover: "covers/cover3.jpg",
+      file: "song3.mp3", cover: "cover3.jpg",
       lyrics: [
         "Vaa vaa en vasam vaa...", "Kadhal solla vaa...", "Ennai marava vaa...",
         "Iravil kanavu...", "Pagalil ninaivo...", "Nee illaamal en life illai..."
@@ -339,7 +319,7 @@
     },
     {
       name: "chillanjirukkiye", artist: "Yuvan Shankar Raja", emoji: "🎉",
-      file: "song4.mp3", cover: "covers/cover4.jpg",
+      file: "song4.mp3", cover: "cover4.jpg",
       lyrics: [
         "Rowdy baby...", "Maari maari...", "Thol thol...",
         "Dance pannuvom...", "Sarakku vaanguvom...", "Nee endhan life..."
@@ -347,7 +327,7 @@
     },
     {
       name: "Innum Konjam Neram", artist: "James Vasanthan", emoji: "🌙",
-      file: "song5.mp3", cover: "covers/cover5.jpg",
+      file: "song5.mp3", cover: "cover5.jpg",
       lyrics: [
         "Innum konjam neram...", "Irundhu po...", "Unnai paarkka...",
         "Ennuyir nee...", "Kaathal mazhai...", "Vizhigalil nee..."
@@ -355,24 +335,21 @@
     },
     {
       name: "urugi urugi", artist: "Harris Jayaraj", emoji: "💚",
-      file: "song6.mp3", cover: "covers/cover6.jpg",
+      file: "song6.mp3", cover: "cover6.jpg",
       lyrics: [
         "Manmatha rasa...", "Vaa vaa vaa...", "Ennai tholaitha...",
         "Nenjukulle...", "Oru naal...", "Nee endhan kaadhal..."
       ]
     },
   ];
-
   let current=-1, isPlaying=false, shuffle=false, repeat=false;
   let addModalSongIdx=-1, expandedPl=null, lyricsOpen=false;
   let playlists=JSON.parse(localStorage.getItem("ms_playlists")||"{}");
   const audio=document.getElementById("audioPlayer");
-
   // ── EQUALIZER SETUP ──────────────────────────────────────────
   let audioCtx, analyser, source, animFrame;
   const canvas = document.getElementById("equalizerCanvas");
   const ctx2d  = canvas.getContext("2d");
-
   function setupAudioContext() {
     if (audioCtx) return;
     audioCtx  = new (window.AudioContext || window.webkitAudioContext)();
@@ -382,7 +359,6 @@
     source.connect(analyser);
     analyser.connect(audioCtx.destination);
   }
-
   function drawEqualizer() {
     animFrame = requestAnimationFrame(drawEqualizer);
     canvas.width  = canvas.offsetWidth;
@@ -403,28 +379,23 @@
       x += barW;
     }
   }
-
   function startEqualizer() {
     setupAudioContext();
     if (audioCtx.state === "suspended") audioCtx.resume();
     canvas.classList.add("active");
     if (!animFrame) drawEqualizer();
   }
-
   function stopEqualizer() {
     canvas.classList.remove("active");
     if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
   }
-
   // ── LYRICS ───────────────────────────────────────────────────
   let lyricsInterval = null;
-
   function toggleLyrics() {
     lyricsOpen = !lyricsOpen;
     document.getElementById("lyricsPanel").classList.toggle("open", lyricsOpen);
     document.getElementById("lyricsToggleBtn").classList.toggle("active", lyricsOpen);
   }
-
   function updateLyricsPanel(i) {
     const s = songs[i];
     // Cover
@@ -434,7 +405,6 @@
       : s.emoji;
     document.getElementById("lyricsSongName").textContent   = s.name;
     document.getElementById("lyricsArtistName").textContent = s.artist;
-
     // Lyrics lines
     const body = document.getElementById("lyricsBody");
     if (!s.lyrics || s.lyrics.length === 0) {
@@ -444,7 +414,6 @@
     body.innerHTML = s.lyrics.map((line, idx) =>
       `<div class="lyrics-line" id="lyric-${idx}">${line}</div>`
     ).join("");
-
     // Auto highlight based on time
     if (lyricsInterval) clearInterval(lyricsInterval);
     lyricsInterval = setInterval(() => {
@@ -461,7 +430,6 @@
       if (activeLine) activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 500);
   }
-
   // ── LOGIN ────────────────────────────────────────────────────
   function doLogin() {
     const u=document.getElementById("uname").value.trim();
@@ -480,14 +448,12 @@
     document.getElementById("userLabel").textContent=savedUser;
     renderGrid(songs); renderPlaylists();
   }
-
   let lightMode=false;
   function toggleTheme(){
     lightMode=!lightMode;
     document.body.classList.toggle("light",lightMode);
     document.getElementById("themeBtn").textContent=lightMode?"☀️":"🌙";
   }
-
   function filterSongs(){
     const q=document.getElementById("searchInput").value.toLowerCase();
     const filtered=q?songs.filter(s=>s.name.toLowerCase().includes(q)||s.artist.toLowerCase().includes(q)):songs;
@@ -495,7 +461,6 @@
     document.getElementById("noResults").style.display=filtered.length?"none":"block";
     document.getElementById("albumGrid").style.display=filtered.length?"grid":"none";
   }
-
   function renderGrid(list){
     document.getElementById("songCount").textContent=list.length+" songs";
     document.getElementById("albumGrid").innerHTML=list.map((s,i)=>{
@@ -511,7 +476,6 @@
       </div>`;
     }).join("");
   }
-
   function playSong(i){
     document.querySelectorAll(".album-card").forEach(c=>c.classList.remove("playing"));
     const card=document.getElementById("card-"+i);
@@ -519,7 +483,6 @@
     current=i; const s=songs[i];
     audio.src=s.file; audio.play().catch(()=>{});
     isPlaying=true;
-
     // Player bar
     const thumb=document.getElementById("playerThumb");
     if(s.cover){ thumb.innerHTML=`<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.textContent='${s.emoji}'">`; }
@@ -529,17 +492,13 @@
     document.getElementById("playPauseBtn").textContent="⏸";
     document.getElementById("playerBar").classList.add("visible");
     thumb.classList.add("playing");
-
     // Equalizer
     startEqualizer();
-
     // Lyrics panel update
     updateLyricsPanel(i);
-
     const q=document.getElementById("searchInput").value.toLowerCase();
     renderGrid(q?songs.filter(x=>x.name.toLowerCase().includes(q)||x.artist.toLowerCase().includes(q)):songs);
   }
-
   function togglePlay(){
     if(current===-1) return;
     if(isPlaying){
@@ -554,7 +513,6 @@
       startEqualizer();
     }
   }
-
   function nextSong(){ let n; if(shuffle){do{n=Math.floor(Math.random()*songs.length);}while(n===current&&songs.length>1);}else n=(current+1)%songs.length; playSong(n); }
   function prevSong(){ if(audio.currentTime>3){audio.currentTime=0;return;} playSong((current-1+songs.length)%songs.length); }
   function toggleShuffle(){ shuffle=!shuffle; document.getElementById("shuffleBtn").classList.toggle("on",shuffle); showToast(shuffle?"Shuffle ON da!":"Shuffle OFF"); }
@@ -570,11 +528,9 @@
     document.getElementById("durTime").textContent=fmt(audio.duration);
   };
   audio.onended=()=>repeat?audio.play().catch(()=>{}):nextSong();
-
   function seekSong(){ if(audio.duration) audio.currentTime=(document.getElementById("progressBar").value/100)*audio.duration; }
   function setVol(){ audio.volume=document.getElementById("volBar").value; }
   function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+":"+(s%60).toString().padStart(2,"0"); }
-
   function createPlaylist(){
     const name=document.getElementById("newPlaylistInput").value.trim();
     if(!name){showToast("Name enter pannu!");return;}
@@ -596,7 +552,6 @@
       </div>`).join("");
   }
   function togglePlaylist(name){ expandedPl=expandedPl===name?null:name; renderPlaylists(); }
-
   function openModal(idx){
     addModalSongIdx=idx;
     const keys=Object.keys(playlists);
@@ -615,7 +570,6 @@
   document.getElementById("modalOverlay").onclick=e=>{ if(e.target===e.currentTarget) closeModal(); };
 
   function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2500); }
-
   renderPlaylists();
 </script>
 </body>
