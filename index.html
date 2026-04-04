@@ -621,7 +621,7 @@ function showRegisterForm() {
 function showLoginForm() {
   document.querySelector(".login-card h2").textContent = "Log in to MySpotify";
   document.querySelector(".login-btn").textContent = "Log In";
-  document.querySelector(".login-btn").setAttribute("onclick", "doLogin()");
+  document.querySelector(".login-btn").onclick = doLogin;
   document.querySelector(".login-footer").innerHTML = 
     'Don\'t have an account? <span onclick="showRegisterForm()">Sign up</span>';
 }
