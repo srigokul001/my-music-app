@@ -257,7 +257,7 @@
       <div class="login-field"><label>USERNAME</label><input id="uname" placeholder="Enter your username"></div>
       <div class="login-field"><label>PASSWORD</label><input id="upass" type="password" placeholder="Enter your password"></div>
     </div>
-    <button class="login-btn" id="loginBtn" onclick="doLogin()">Log In</button>
+<button class="login-btn" id="loginBtn" onclick="doLogin()">Log In</button>
     <p class="login-footer">Don't have an account? <span onclick="showRegisterForm()">Sign up</span></p>
   </div>
 </div>
@@ -757,6 +757,7 @@ function doLogout() {
   document.getElementById("upass").value = "";
   showLoginForm();
 }
+document.getElementById("loginBtn").onclick = doLogin;
 </script>
 </body>
 </html>
