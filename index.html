@@ -1172,7 +1172,7 @@ let fsTouchStartX = 0;
 let fsTouchStartY = 0;
 let fsPointerActive = false;
 function initFullscreenSwipe() {
-  const cover = document.getElementById("playerCoverPane");
+  const cover = document.getElementById("albumCoverLarge");
   const lyricsOverlay = document.getElementById("fullscreenLyrics");
   if (!cover) return;
   const startSwipe = (x, y) => {
@@ -1190,13 +1190,7 @@ function initFullscreenSwipe() {
     }
   };
   const moveSwipe = (x, y) => {
-    if (!fsPointerActive) return;
-    const dx = x - fsTouchStartX;
-    const dy = y - fsTouchStartY;
-    if (dx < -50 && Math.abs(dy) < 100) {
-      fsPointerActive = false;
-      showFullscreenLyrics();
-    }
+    // Removed trigger on move to avoid premature activation
   };
   cover.addEventListener("touchstart", e => {
     const t = e.touches[0];
