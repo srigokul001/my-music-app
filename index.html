@@ -4,31 +4,46 @@
 <meta charset="UTF-8">
 <style>
   @media (max-width: 768px) {
-    .main {
-  height: calc(100vh - 72px);
-  overflow-y: auto;
+  /* Sidebar-ah mothama hide panradhu */
+  .sidebar {
+    display: none !important;
+  }
+  /* App body flex layout-ah maathi content-ah full width aakanum */
+  .app-body {
+    display: block; 
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+  .main {
+    width: 100%;
+    padding: 0;
+  }
+  /* Album grid row-ku 2 songs vara maari adjust panradhu */
+  .album-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+    padding: 10px 15px 150px;
+  }
+  .main-header {
+    padding: 10px 15px;
+  }
+  /* Header-la irukura items romba nerukama irundha idhai add pannunga */
+  .search-wrap {
+    margin-right: 5px;
+  }
 }
 .album-grid {
   padding-bottom: 160px;
 }
-  .sidebar {
-    display: none;
-  }
-  .main-header {
-    padding: 12px 16px;
-    gap: 8px;
-  }
-  .album-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 0 12px 120px;
-  }
   .section-header {
     padding: 0 12px 12px;
   }
+  #equalizerCanvas {
+  bottom: 72px; /* Exact-ah player bar mela niknum */
+  height: 60px;
+}
   .player-bar {
     padding: 0 10px;
-    gap: 8px;
   }
   .player-left {
     width: 120px;
