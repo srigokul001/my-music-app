@@ -2,103 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#121212">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
   @media (max-width: 768px) {
-  /* Sidebar-ah mothama hide panradhu */
-  .sidebar {
-    display: none !important;
-  }
-  /* App body flex layout-ah maathi content-ah full width aakanum */
-  .app-body {
-    display: flex; 
-    flex-direction: column;
-    height: calc(100vh - 72px);
-  }
-  .main {
-    flex: 1;
-      overflow-y: auto;
-    width: 100%;
-  }
-  /* Album grid row-ku 2 songs vara maari adjust panradhu */
-  .album-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px;
-    padding: 0 12px 140px !important;
-  }
-  .main-header {
-    padding: 10px 15px;
-  }
-  /* Header-la irukura items romba nerukama irundha idhai add pannunga */
-  .search-wrap {
-    margin-right: 5px;
-  }
+  .sidebar { display: none !important; }
+  .app-body { flex-direction: column; height: calc(100dvh - 72px); }
+  .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; }
+  .main-header { padding: 10px 12px; gap: 8px; }
+  .search-wrap { padding: 8px 12px; }
+  .section-header { padding: 0 12px 10px; }
+  .album-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; padding: 0 12px 160px !important; }
+  .album-card { padding: 10px; }
+  .album-name { font-size: 12px; }
+  .album-artist { font-size: 11px; }
+  .player-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; padding: 0 12px; gap: 10px; z-index: 9999; }
+  .player-left { width: 140px; }
+  .player-thumb { width: 40px; height: 40px; }
+  .player-title { font-size: 12px; }
+  .player-artist { font-size: 10px; }
+  .player-right { display: none; }
+  .user-chip { display: none; }
+  .ctrl-btn { font-size: 16px; padding: 4px; }
+  .ctrl-play { width: 32px; height: 32px; font-size: 14px; }
+  .theme-btn { width: 32px; height: 32px; font-size: 14px; flex-shrink: 0; }
+  .login-card { width: 92%; padding: 2rem 1.5rem; }
+  .lyrics-panel { width: 100%; }
+  #equalizerCanvas { bottom: 64px; height: 50px; }
 }
-.album-grid {
-  padding-bottom: 160px;
-}
-  .section-header {
-    padding: 0 12px 12px;
-  }
-  #equalizerCanvas {
-  bottom: 72px; /* Exact-ah player bar mela niknum */
-  height: 60px;
-}
- .player-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100% !important;
-      z-index: 9999;
-      background: var(--player-bg);
-      padding: 0 10px;
-  }
-  .player-left {
-    width: 120px;
-  }
-  .player-right {
-    display: none;
-  }
-  .player-center {
-    max-width: 100%;
-  }
-  .user-chip {
-    display: none;
-  }
-  .theme-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
-  .login-card {
-    width: 90%;
-    padding: 2rem 1.5rem;
-  }
-  .lyrics-panel {
-    width: 100%;
-  }
 
-@media (max-width: 480px) {
-  .album-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    padding: 0 8px 120px;
-  }
-  .player-thumb {
-    width: 38px;
-    height: 38px;
-  }
-  .player-title {
-    font-size: 11px;
-  }
-  .controls button {
-    font-size: 14px;
-    padding: 4px;
-  }
-  .lyrics-panel {
-    width: 100%;
-  }
-}  
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&display=swap');
   :root {
     --bg: #0a0a0a; --sidebar-bg: #111; --card-bg: #181818;
