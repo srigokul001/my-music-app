@@ -8,30 +8,51 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
   @media (max-width: 1024px) {
-  .sidebar { display: none !important; }
-  .app-body { flex-direction: column; height: calc(100dvh - 72px); }
-  .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; }
-  .main-header { padding: 10px 12px; gap: 8px; }
-  .search-wrap { padding: 8px 12px; }
-  .section-header { padding: 0 12px 10px; }
-  .album-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; padding: 0 12px 160px !important; }
-  .album-card { padding: 10px; }
-  .album-name { font-size: 12px; }
-  .album-artist { font-size: 11px; }
-  .player-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; padding: 0 12px; gap: 10px; z-index: 9999; }
-  .player-left { width: 140px; }
-  .player-thumb { width: 40px; height: 40px; }
-  .player-title { font-size: 12px; }
-  .player-artist { font-size: 10px; }
-  .player-right { display: none; }
-  .user-chip { display: none; }
-  .ctrl-btn { font-size: 16px; padding: 4px; }
-  .ctrl-play { width: 32px; height: 32px; font-size: 14px; }
-  .theme-btn { width: 32px; height: 32px; font-size: 14px; flex-shrink: 0; }
-  .login-card { width: 92%; padding: 2rem 1.5rem; }
-  .lyrics-panel { width: 100%; }
-  #equalizerCanvas { bottom: 64px; height: 50px; }
-}
+    .sidebar { display: none !important; }
+    .app-body { flex-direction: column; height: calc(100dvh - 64px); }
+    .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; }
+    .main-header { padding: 10px 12px; gap: 8px; }
+    .search-wrap { padding: 8px 12px; }
+    .section-header { padding: 0 12px 8px; }
+    .album-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; padding: 0 12px 120px !important; }
+    .album-card { padding: 10px; }
+    .album-name { font-size: 12px; }
+    .album-artist { font-size: 11px; }
+    .player-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; padding: 0 10px; gap: 10px; z-index: 9999; }
+    .player-left { width: 130px; }
+    .player-thumb { width: 38px; height: 38px; }
+    .player-title { font-size: 12px; }
+    .player-artist { font-size: 10px; }
+    .player-right { display: none; }
+    .user-chip { display: none; }
+    .ctrl-btn { font-size: 16px; padding: 4px; }
+    .ctrl-play { width: 32px; height: 32px; font-size: 14px; }
+    .theme-btn { width: 32px; height: 32px; font-size: 14px; flex-shrink: 0; }
+    .login-card { width: 95%; padding: 2rem 1.5rem; }
+    .lyrics-panel { width: 100%; }
+    #equalizerCanvas { bottom: 64px; height: 46px; }
+  }
+
+  @media (max-width: 640px) {
+    .main-header { padding: 8px 10px; gap: 8px; }
+    .search-wrap { padding: 7px 10px; }
+    .section-header { padding: 0 10px 8px; }
+    .album-grid { grid-template-columns: 1fr !important; gap: 8px; padding: 0 10px 100px !important; }
+    .player-bar { height: 56px; padding: 0 10px; gap: 8px; }
+    .player-left { width: 110px; }
+    .player-thumb { width: 34px; height: 34px; }
+    .player-title { font-size: 11px; }
+    .player-artist { font-size: 9px; }
+    .ctrl-btn { font-size: 14px; padding: 3px; }
+    .ctrl-play { width: 30px; height: 30px; font-size: 13px; }
+    .theme-btn { width: 30px; height: 30px; font-size: 13px; }
+    .section-header h2 { font-size: 18px; }
+    .album-card { min-height: auto; }
+    .album-art { margin-bottom: 10px; }
+    .lyrics-panel { width: 100%; }
+    .login-card { width: 100%; border-radius: 0; max-width: 100%; }
+    .no-results { padding: 40px 10px; }
+  }
 
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&display=swap');
   :root {
