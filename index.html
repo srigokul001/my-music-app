@@ -369,7 +369,7 @@
   .fullscreen-lyrics .lyrics-full-body { flex: 1; overflow-y: auto; font-size: 16px; line-height: 1.8; color: var(--text-muted); }
   .fullscreen-lyrics .lyrics-full-body p { margin: 0 0 12px; }
   .fullscreen-lyrics .lyrics-line-full { margin: 0 0 12px; white-space: pre-wrap; }
-  .lyrics-line.active, .lyrics-line-full.active { color: var(--accent); font-weight: bold; background: rgba(29,185,84,0.2); padding: 4px; border-radius: 4px; }
+  .lyrics-line, .lyrics-line-full { color: purple; font-weight: bold; }
 </style>
 </style>
 </head>
@@ -759,8 +759,6 @@
     if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
   }
   // ── LYRICS ───────────────────────────────────────────────────
-  let lyricsInterval = null;
-  let fullscreenLyricsInterval = null;
   function toggleLyrics() {
     lyricsOpen = !lyricsOpen;
     document.getElementById("lyricsPanel").classList.toggle("open", lyricsOpen);
@@ -784,21 +782,6 @@
     body.innerHTML = s.lyrics.map((line, idx) =>
       `<div class="lyrics-line" id="lyric-${idx}">${line}</div>`
     ).join("");
-    // Auto highlight based on time
-    if (lyricsInterval) clearInterval(lyricsInterval);
-    lyricsInterval = setInterval(() => {
-      if (!audio.duration) return;
-      const pct = audio.currentTime / audio.duration;
-      const lineIdx = Math.min(
-        Math.floor(pct * s.lyrics.length),
-        s.lyrics.length - 1
-      );
-      document.querySelectorAll(".lyrics-line").forEach((el, idx) => {
-        el.classList.toggle("active", idx === lineIdx);
-      });
-      const activeLine = document.getElementById(`lyric-${lineIdx}`);
-      if (activeLine) activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
   }
   // ── LOGIN ────────────────────────────────────────────────────
   async function doLogin() {
@@ -1158,17 +1141,6 @@ function showFullscreenLyrics() {
     body.innerHTML = s.lyrics.map((line, idx) => `
       <div class="lyrics-line lyrics-line-full" id="fullscreen-lyric-${idx}">${line}</div>
     `).join("");
-    if (fullscreenLyricsInterval) clearInterval(fullscreenLyricsInterval);
-    fullscreenLyricsInterval = setInterval(() => {
-      if (!audio.duration) return;
-      const pct = audio.currentTime / audio.duration;
-      const lineIdx = Math.min(Math.floor(pct * s.lyrics.length), s.lyrics.length - 1);
-      document.querySelectorAll(".lyrics-line-full").forEach((el, idx) => {
-        el.classList.toggle("active", idx === lineIdx);
-      });
-      const activeLine = document.getElementById(`fullscreen-lyric-${lineIdx}`);
-      if (activeLine) activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
   } else {
     body.innerHTML = `<div class="lyrics-empty">Lyrics unavailable</div>`;
   }
@@ -1178,10 +1150,6 @@ function showFullscreenLyrics() {
 function closeFullscreenLyrics() {
   document.getElementById("fullscreenLyrics").classList.remove("active");
   document.getElementById("fullscreenLyrics").style.transform = '';
-  if (fullscreenLyricsInterval) {
-    clearInterval(fullscreenLyricsInterval);
-    fullscreenLyricsInterval = null;
-  }
 }
 
 let fsTouchStartX = 0;
