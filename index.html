@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <style>
   @media (max-width: 768px) {
+    .main {
+  height: calc(100vh - 72px);
+  overflow-y: auto;
+}
+.album-grid {
+  padding-bottom: 160px;
+}
   .sidebar {
     display: none;
   }
@@ -82,10 +89,10 @@
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Figtree', sans-serif; background: var(--bg);
-    color: var(--text); height: 100vh; overflow: hidden;
-    display: flex; flex-direction: column; transition: background 0.3s, color 0.3s;
-  }
+  font-family: 'Figtree', sans-serif; background: var(--bg);
+  color: var(--text); min-height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; transition: background 0.3s, color 0.3s;
+}
   /* LOGIN */
   #loginOverlay {
     position: fixed; inset: 0; background: #0a0a0a;
