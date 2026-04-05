@@ -65,6 +65,10 @@
     .volume-section { padding: 4px; gap: 4px; }
     .volume-section .vol-icon { font-size: 12px; }
     input[type=range].vol-bar-vertical { height: 4px; width: 60px; transform: rotate(-90deg); transform-origin: center; margin: 30px 0; }
+    .controls { gap: 8px; }
+    .ctrl-btn { font-size: 14px; padding: 4px; width: 28px; height: 28px; }
+    .shuffle-btn, .repeat-btn { font-size: 12px; width: 24px; height: 24px; padding: 3px; }
+    .ctrl-play { width: 36px; height: 36px; font-size: 16px; }
     .main-header { padding: 8px 10px; gap: 8px; }
     .search-wrap { padding: 7px 10px; }
     .section-header { padding: 0 10px 8px; }
@@ -74,8 +78,9 @@
     .player-thumb { width: 34px; height: 34px; }
     .player-title { font-size: 11px; }
     .player-artist { font-size: 9px; }
-    .ctrl-btn { font-size: 14px; padding: 3px; }
-    .ctrl-play { width: 30px; height: 30px; font-size: 13px; }
+    .ctrl-btn { font-size: 14px; padding: 3px; width: 28px; height: 28px; }
+    .shuffle-btn, .repeat-btn { font-size: 12px; width: 24px; height: 24px; padding: 2px; }
+    .ctrl-play { width: 36px; height: 36px; font-size: 15px; }
     .theme-btn { width: 30px; height: 30px; font-size: 13px; }
     .section-header h2 { font-size: 18px; }
     .album-card { min-height: auto; }
@@ -84,6 +89,10 @@
     .login-card { width: 100%; border-radius: 0; max-width: 100%; }
     .no-results { padding: 40px 10px; }
     .main { min-height: 0; }
+    .controls { gap: 10px; }
+    .ctrl-btn { font-size: 15px; padding: 5px; width: 30px; height: 30px; }
+    .shuffle-btn, .repeat-btn { font-size: 13px; width: 26px; height: 26px; padding: 4px; }
+    .ctrl-play { width: 40px; height: 40px; font-size: 17px; }
   }
 
   @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&display=swap');
@@ -243,11 +252,13 @@
   .player-title { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
   .player-artist { font-size: 11px; color: var(--text-muted); }
   .player-center { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 500px; }
-  .controls { display: flex; align-items: center; gap: 8px; }
-  .ctrl-btn { background: transparent; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; padding: 6px; border-radius: 50%; transition: color 0.2s; display: flex; align-items: center; justify-content: center; }
-  .ctrl-btn:hover { color: var(--text); }
-  .ctrl-play { background: var(--text); color: var(--bg); width: 36px; height: 36px; font-size: 15px; border-radius: 50%; }
-  .ctrl-play:hover { background: var(--accent); color: #000; transform: scale(1.05); }
+  .controls { display: flex; align-items: center; gap: 12px; }
+  .ctrl-btn { background: transparent; border: none; color: var(--text-muted); font-size: 16px; cursor: pointer; padding: 8px; border-radius: 50%; transition: color 0.2s, background 0.2s; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
+  .ctrl-btn:hover { color: var(--text); background: var(--card-bg); }
+  .shuffle-btn, .repeat-btn { font-size: 14px; width: 28px; height: 28px; padding: 6px; opacity: 0.7; }
+  .shuffle-btn:hover, .repeat-btn:hover { opacity: 1; }
+  .ctrl-play { background: var(--text); color: var(--bg); width: 44px; height: 44px; font-size: 18px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .ctrl-play:hover { background: var(--accent); color: #000; transform: scale(1.05); box-shadow: 0 4px 12px rgba(29,185,84,0.4); }
   .shuffle-btn.on, .repeat-btn.on { color: var(--accent); }
   .progress-row { width: 100%; display: flex; align-items: center; gap: 8px; }
   .time-label { font-size: 10px; color: var(--text-dim); min-width: 30px; }
