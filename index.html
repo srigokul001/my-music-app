@@ -8,8 +8,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
   @media (max-width: 1024px) {
-    .sidebar { display: none !important; }
-    .app-body { flex-direction: column; height: calc(100dvh - 64px); }
+    .sidebar { width: 140px; padding: 8px 6px; gap: 6px; }
+    .sidebar-logo { font-size: 12px; }
+    .nav-item { font-size: 9px; padding: 4px 6px; }
+    .sidebar-section { margin-top: 6px; gap: 3px; }
+    .sidebar-section-title { font-size: 7px; }
+    .favorite-card { font-size: 9px; padding: 4px; }
+    .favorite-card span:last-child { font-size: 7px; }
+    .new-playlist-row { padding: 4px; gap: 2px; }
+    .new-playlist-row input { font-size: 8px; padding: 3px 5px; }
+    .new-playlist-row button { font-size: 9px; padding: 3px 5px; min-width: 24px; }
+    .playlist-item { font-size: 8px; padding: 3px 4px; }
+    .playlist-count { font-size: 6px; padding: 0px 2px; }
+    .app-body { flex-direction: row; height: calc(100dvh - 64px); }
     .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; }
     .main-header { padding: 10px 12px; gap: 8px; }
     .search-wrap { padding: 8px 12px; }
@@ -34,6 +45,20 @@
   }
 
   @media (max-width: 640px) {
+    .sidebar { width: 110px; padding: 6px 5px; gap: 4px; }
+    .sidebar-logo { font-size: 10px; }
+    .nav-item { font-size: 8px; padding: 3px 5px; }
+    .sidebar-section { margin-top: 4px; gap: 2px; }
+    .sidebar-section-title { font-size: 6px; }
+    .favorite-card { font-size: 8px; padding: 3px; }
+    .favorite-card span:last-child { font-size: 6px; padding: 0px 2px; }
+    .new-playlist-row { padding: 3px; gap: 2px; }
+    .new-playlist-row input { font-size: 7px; padding: 2px 4px; }
+    .new-playlist-row button { font-size: 8px; padding: 2px 4px; min-width: 20px; }
+    .playlist-item { font-size: 7px; padding: 2px 4px; }
+    .playlist-count { font-size: 6px; padding: 0px 2px; }
+    .playlist-songs-list { padding: 1px 2px 2px 10px; }
+    .playlist-song-item { font-size: 7px; padding: 1px 0; }
     .main-header { padding: 8px 10px; gap: 8px; }
     .search-wrap { padding: 7px 10px; }
     .section-header { padding: 0 10px 8px; }
@@ -98,23 +123,28 @@
   #app { display: none; flex: 1; overflow: hidden; min-height: 0; }
   .app-body { display: flex; flex: 1; height: calc(100vh - 72px); overflow: hidden; min-height: 0; }
   /* SIDEBAR */
-  .sidebar { width: 240px; background: var(--sidebar-bg); padding: 20px 16px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; border-right: 1px solid var(--border); transition: background 0.3s; }
-  .sidebar-logo { font-size: 18px; font-weight: 900; color: var(--text); }
+  .sidebar { width: 160px; background: var(--sidebar-bg); padding: 10px 8px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; border-right: 1px solid var(--border); transition: background 0.3s; }
+  .sidebar-logo { font-size: 13px; font-weight: 900; color: var(--text); }
   .sidebar-logo span { color: var(--accent); }
-  .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
-  .nav-item { padding: 10px 12px; border-radius: 8px; color: var(--text-muted); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav-item { padding: 6px 8px; border-radius: 6px; color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .nav-item:hover, .nav-item.active { background: var(--card-bg); color: var(--text); }
-  .sidebar-section-title { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
-  .new-playlist-row { display: flex; gap: 6px; }
-  .new-playlist-row input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text); font-size: 12px; font-family: 'Figtree', sans-serif; outline: none; transition: border 0.2s; }
+  .sidebar-section { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+  .sidebar-section-title { font-size: 8px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.3px; text-transform: uppercase; padding: 0 2px; }
+  .favorite-card, .new-playlist-row, .playlist-list { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px; }
+  .favorite-card { display: flex; align-items: center; justify-content: space-between; cursor: pointer; gap: 6px; color: var(--text); font-weight: 700; font-size: 10px; }
+  .favorite-card:hover { background: var(--card-hover); }
+  .favorite-card span:last-child { font-size: 8px; background: var(--tag-bg); padding: 1px 4px; border-radius: 3px; }
+  .new-playlist-row { display: flex; gap: 3px; }
+  .new-playlist-row input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); border-radius: 4px; padding: 4px 6px; color: var(--text); font-size: 9px; font-family: 'Figtree', sans-serif; outline: none; transition: border 0.2s; }
   .new-playlist-row input:focus { border-color: var(--accent); }
-  .new-playlist-row button { background: var(--accent); border: none; border-radius: 8px; padding: 8px 10px; color: #000; font-weight: 700; font-size: 13px; cursor: pointer; }
-  .playlist-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-radius: 8px; font-size: 13px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+  .new-playlist-row button { background: var(--accent); border: none; border-radius: 4px; padding: 4px 6px; color: #000; font-weight: 700; font-size: 10px; cursor: pointer; min-width: 28px; }
+  .playlist-item { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 4px; font-size: 9px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
   .playlist-item:hover, .playlist-item.expanded { background: var(--card-bg); color: var(--text); }
-  .playlist-count { background: var(--tag-bg); color: var(--text-dim); font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
-  .playlist-songs-list { padding: 4px 10px 8px 22px; display: flex; flex-direction: column; gap: 4px; }
-  .playlist-song-item { font-size: 12px; color: var(--text-dim); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
-  .playlist-song-item::before { content: '♪'; color: var(--accent); font-size: 10px; }
+  .playlist-count { background: var(--tag-bg); color: var(--text-dim); font-size: 7px; padding: 1px 3px; border-radius: 2px; font-weight: 600; }
+  .playlist-songs-list { padding: 2px 4px 4px 14px; display: flex; flex-direction: column; gap: 1px; }
+  .playlist-song-item { font-size: 8px; color: var(--text-dim); padding: 2px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 3px; }
+  .playlist-song-item::before { content: '♪'; color: var(--accent); font-size: 6px; }
   /* MAIN */
   .main { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y; background: var(--bg); transition: background 0.3s; }
   .main-header { position: sticky; top: 0; z-index: 10; background: linear-gradient(180deg, var(--bg) 80%, transparent); padding: 20px 24px 12px; display: flex; align-items: center; gap: 16px; }
@@ -130,7 +160,12 @@
   .section-header h2 { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
   .section-sub { font-size: 12px; color: var(--text-dim); }
   .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; padding: 0 24px 120px; }
+  .album-grid.list-view { grid-template-columns: 1fr; }
   .album-card { background: var(--card-bg); border-radius: 12px; padding: 14px; cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; animation: fadeUp 0.4s ease both; }
+  .album-grid.list-view .album-card { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px; }
+  .album-grid.list-view .album-art { width: 48px; min-width: 48px; height: 48px; margin-bottom: 0; }
+  .album-grid.list-view .album-name, .album-grid.list-view .album-artist { display: inline; }
+  .album-grid.list-view .add-playlist-btn { position: relative; top: auto; right: auto; margin-left: auto; opacity: 1; }
   .album-card:hover { background: var(--card-hover); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
   .album-card.playing { box-shadow: 0 0 0 2px var(--accent); }
   .album-art { width: 100%; aspect-ratio: 1; border-radius: 8px; background: var(--input-bg); display: flex; align-items: center; justify-content: center; font-size: 48px; position: relative; overflow: hidden; margin-bottom: 12px; }
@@ -277,12 +312,22 @@
         <div class="nav-item">🔍 Search</div>
         <div class="nav-item">📚 Library</div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="sidebar-section-title">Playlists</div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Favorites</div>
+      <div class="favorite-card" ondblclick="showFavorites()" onclick="showFavorites()">
+          <span>💚 My Favorites</span>
+          <span id="favCount">0</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Create playlist</div>
         <div class="new-playlist-row">
           <input id="newPlaylistInput" placeholder="New playlist..." />
           <button onclick="createPlaylist()">+</button>
         </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Playlists</div>
         <div class="playlist-list" id="playlistList"></div>
       </div>
     </div>
@@ -297,7 +342,20 @@
       </div>
       <div class="section-header">
         <h2>All Songs</h2>
-        <span class="section-sub" id="songCount">6 songs</span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <select id="sortBy" onchange="changeSorting()" style="background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-family: 'Figtree', sans-serif; cursor: pointer;">
+            <option value="recent">🆕 Recent Added</option>
+            <option value="artist">👤 By Artist</option>
+            <option value="name">🔤 Alphabetical</option>
+            <option value="popularity">🔥 Popularity</option>
+            <option value="featured">⭐ Featured</option>
+          </select>
+          <button onclick="toggleViewMode()" style="background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 6px 8px; border-radius: 6px; font-size: 11px; font-family: 'Figtree', sans-serif; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+            <span id="viewToggleIcon">📋</span>
+            <span id="viewToggleText">List</span>
+          </button>
+          <span class="section-sub" id="songCount">6 songs</span>
+        </div>
       </div>
       <div class="album-grid" id="albumGrid"></div>
       <div class="no-results" id="noResults" style="display:none;"><span>🎵</span>Illa da, results kidaikala!</div>
@@ -477,6 +535,13 @@
   let current=-1, isPlaying=false, shuffle=false, repeat=false;
   let addModalSongIdx=-1, expandedPl=null, lyricsOpen=false;
   let playlists=JSON.parse(localStorage.getItem("ms_playlists")||"{}");
+  let favorites=JSON.parse(localStorage.getItem("ms_favorites")||"[]");
+  let currentPlaylist=null; // Track which playlist is playing
+  let lightMode=false;
+  let sortingMode="recent"; // Sort mode: recent, artist, name, popularity, featured
+  let viewMode="grid"; // View mode: grid or list
+  let playCounts=JSON.parse(localStorage.getItem("ms_playCounts")||"{}"); // Track play counts for popularity
+  let dateAdded=JSON.parse(localStorage.getItem("ms_dateAdded")||"{}"); // Track when songs were added
   const audio=document.getElementById("audioPlayer");
   // ── EQUALIZER SETUP ──────────────────────────────────────────
   let audioCtx, analyser, source, animFrame;
@@ -627,25 +692,61 @@ function showLoginForm() {
     document.body.classList.toggle("light",lightMode);
     document.getElementById("themeBtn").textContent=lightMode?"☀️":"🌙";
   }
+  function changeSorting(){
+    sortingMode=document.getElementById("sortBy").value;
+    const q=document.getElementById("searchInput").value.toLowerCase();
+    const filtered=q?songs.filter(s=>s.name.toLowerCase().includes(q)||s.artist.toLowerCase().includes(q)):songs;
+    const sorted=sortSongs(filtered);
+    renderGrid(sorted);
+  }
+  function toggleViewMode(){
+    viewMode=viewMode==="grid"?"list":"grid";
+    document.getElementById("viewToggleIcon").textContent=viewMode==="list"?"🎵":"📋";
+    document.getElementById("viewToggleText").textContent=viewMode==="list"?"Grid":"List";
+    const grid=document.getElementById("albumGrid");
+    grid.classList.toggle("list-view",viewMode==="list");
+  }
+  function sortSongs(list){
+    const sorted=[...list];
+    if(sortingMode==="artist") sorted.sort((a,b)=>a.artist.localeCompare(b.artist)||a.name.localeCompare(b.name));
+    else if(sortingMode==="name") sorted.sort((a,b)=>a.name.localeCompare(b.name));
+    else if(sortingMode==="popularity") sorted.sort((a,b)=>(playCounts[b.name]||0)-(playCounts[a.name]||0));
+    else if(sortingMode==="featured") sorted.sort((a,b)=>{
+      const featured=["neelothi","oru pere varalaru","pattuma"];
+      return featured.indexOf(a.name)-featured.indexOf(b.name);
+    });
+    // recent is default (no sorting needed)
+    return sorted;
+  }
+  function updatePlayCount(idx){
+    const songName=songs[idx].name;
+    playCounts[songName]=(playCounts[songName]||0)+1;
+    localStorage.setItem("ms_playCounts",JSON.stringify(playCounts));
+  }
   function filterSongs(){
     const q=document.getElementById("searchInput").value.toLowerCase();
     const filtered=q?songs.filter(s=>s.name.toLowerCase().includes(q)||s.artist.toLowerCase().includes(q)):songs;
-    renderGrid(filtered);
+    const sorted=sortSongs(filtered);
+    renderGrid(sorted);
     document.getElementById("noResults").style.display=filtered.length?"none":"block";
     document.getElementById("albumGrid").style.display=filtered.length?"grid":"none";
   }
   function renderGrid(list){
     document.getElementById("songCount").textContent=list.length+" songs";
-    document.getElementById("albumGrid").innerHTML=list.map((s,i)=>{
+    const grid=document.getElementById("albumGrid");
+    grid.classList.toggle("list-view",viewMode==="list");
+    grid.innerHTML=list.map((s,i)=>{
       const ri=songs.indexOf(s);
+      const isFav=favorites.includes(s.name);
       const artHtml=s.cover
         ?`<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="album-art-emoji" style="display:none;">${s.emoji}</div>`
         :`<div class="album-art-emoji">${s.emoji}</div>`;
+      const playCount=playCounts[s.name]||0;
       return `<div class="album-card ${ri===current?'playing':''}" id="card-${ri}" onclick="playSong(${ri})" style="animation-delay:${i*0.05}s">
         <div class="album-art">${artHtml}<div class="play-overlay"><div class="play-circle">${ri===current&&isPlaying?'⏸':'▶'}</div></div></div>
+        ${viewMode==="list"?`<div style="flex:1;display:flex;flex-direction:column;gap:2px;"><div class="album-name" style="margin-bottom:0;">${s.name}</div><div class="album-artist">${s.artist}${playCount>0?` • ${playCount} plays`:''}</div></div>`:`<div class="album-name">${s.name}</div><div class="album-artist">${s.artist}${viewMode==="list"?'':''}</div>`}
         <button class="add-playlist-btn" onclick="event.stopPropagation();openModal(${ri})">+</button>
-        <div class="album-name">${s.name}</div>
-        <div class="album-artist">${s.artist}</div>
+        <button class="add-playlist-btn" style="left:10px;right:auto;" onclick="event.stopPropagation();toggleFavorite('${s.name}')">${isFav?'❤️':'🤍'}</button>
       </div>`;
     }).join("");
   }
@@ -656,6 +757,7 @@ function showLoginForm() {
     current=i; const s=songs[i];
     audio.src=s.file; audio.play().catch(()=>{});
     isPlaying=true;
+    updatePlayCount(i);
     // Player bar
     const thumb=document.getElementById("playerThumb");
     if(s.cover){ thumb.innerHTML=`<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.textContent='${s.emoji}'">`; }
@@ -670,7 +772,9 @@ function showLoginForm() {
     // Lyrics panel update
     updateLyricsPanel(i);
     const q=document.getElementById("searchInput").value.toLowerCase();
-    renderGrid(q?songs.filter(x=>x.name.toLowerCase().includes(q)||x.artist.toLowerCase().includes(q)):songs);
+    const filtered=q?songs.filter(x=>x.name.toLowerCase().includes(q)||x.artist.toLowerCase().includes(q)):songs;
+    const sorted=sortSongs(filtered);
+    renderGrid(sorted);
   }
   function togglePlay(){
     if(current===-1) return;
@@ -712,16 +816,46 @@ function showLoginForm() {
     document.getElementById("newPlaylistInput").value="";
     showToast(`"${name}" create aachhu!`);
   }
+  function showFavorites(){
+    if(favorites.length===0){showToast("No favorites yet!");return;}
+    playFromList(favorites, "My Favorites");
+  }
+  function toggleFavorite(songName){
+    const idx=favorites.indexOf(songName);
+    if(idx>-1){favorites.splice(idx,1);}
+    else{favorites.push(songName);}
+    saveFavorites();
+    const q=document.getElementById("searchInput").value.toLowerCase();
+    renderGrid(q?songs.filter(x=>x.name.toLowerCase().includes(q)||x.artist.toLowerCase().includes(q)):songs);
+    showToast(idx>-1?`"${songName}" removed from favorites!`:`"${songName}" added to favorites!`);
+  }
+  function saveFavorites(){ localStorage.setItem("ms_favorites",JSON.stringify(favorites)); updateFavoritesDisplay(); }
+  function updateFavoritesDisplay(){
+    const favCard=document.querySelector(".favorite-card span:last-child");
+    if(favCard) favCard.textContent=favorites.length;
+  }
+  function playFromPlaylist(name){
+    const playlistSongs=playlists[name];
+    if(playlistSongs.length===0){showToast("Playlist is empty!");return;}
+    playFromList(playlistSongs, name);
+  }
+  function playFromList(songNames, listName){
+    if(songNames.length===0) return;
+    const songIdx=songs.findIndex(s=>s.name===songNames[0]);
+    if(songIdx>-1) playSong(songIdx);
+    currentPlaylist={name:listName, songs:songNames};
+    showToast(`Now playing from: ${listName}`);
+  }
   function savePlaylists(){ localStorage.setItem("ms_playlists",JSON.stringify(playlists)); renderPlaylists(); }
   function renderPlaylists(){
     const keys=Object.keys(playlists);
     document.getElementById("playlistList").innerHTML=keys.length===0
       ?`<div style="font-size:12px;color:var(--text-dim);padding:4px 10px;">No playlists yet</div>`
       :keys.map(name=>`<div>
-        <div class="playlist-item ${expandedPl===name?'expanded':''}" onclick="togglePlaylist('${name}')">
+        <div class="playlist-item ${expandedPl===name?'expanded':''}" onclick="event.stopPropagation();togglePlaylist('${name}')" ondblclick="event.stopPropagation();playFromPlaylist('${name}')">
           <span>🎵 ${name}</span><span class="playlist-count">${playlists[name].length}</span>
         </div>
-        ${expandedPl===name?`<div class="playlist-songs-list">${playlists[name].length===0?`<div class="playlist-song-item" style="border:none;">Songs illai da</div>`:playlists[name].map(s=>`<div class="playlist-song-item">${s}</div>`).join("")}</div>`:""}
+        ${expandedPl===name?`<div class="playlist-songs-list">${playlists[name].length===0?`<div class="playlist-song-item" style="border:none;">Songs illai da</div>`:playlists[name].map(s=>`<div class="playlist-song-item" onclick="event.stopPropagation();playFromList(['${s}'],'${name}')" style="cursor:pointer;">${s}</div>`).join("")}</div>`:""}
       </div>`).join("");
   }
   function togglePlaylist(name){ expandedPl=expandedPl===name?null:name; renderPlaylists(); }
@@ -744,7 +878,8 @@ function showLoginForm() {
 
   function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2500); }
   renderPlaylists();
-renderGrid(songs); 
+  updateFavoritesDisplay();
+  renderGrid(songs);
 function doLogout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
