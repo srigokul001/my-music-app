@@ -491,9 +491,6 @@
         <span class="time-label right" id="durTime">0:00</span>
       </div>
     </div>
-    <div class="player-right">
-      <button class="lyrics-btn" id="lyricsToggleBtn" onclick="toggleLyrics()">📝 Lyrics</button>
-    </div>
   </div>
 </div>
 
@@ -764,7 +761,6 @@
   function toggleLyrics() {
     lyricsOpen = !lyricsOpen;
     document.getElementById("lyricsPanel").classList.toggle("open", lyricsOpen);
-    document.getElementById("lyricsToggleBtn").classList.toggle("active", lyricsOpen);
     document.getElementById("lyricsToggleBtnLarge").classList.toggle("active", lyricsOpen);
   }
   function updateLyricsPanel(i) {
