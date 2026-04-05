@@ -348,10 +348,11 @@
   .ctrl-play-large:hover { background: var(--accent); color: #000; transform: scale(1.1); box-shadow: 0 8px 30px rgba(29,185,84,0.4); }
   .player-actions { display: flex; align-items: center; justify-content: center; gap: 20px; }
   .lyrics-btn-large { background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); border-radius: 25px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-  #playerCoverPane { touch-action: pan-y; }
+  #playerCoverPane { touch-action: none; }
   .player-album-cover { position: relative; }
   .top-minimize-btn { position: absolute; top: 20px; right: 20px; }
-  .album-cover-large { touch-action: pan-y; user-select: none; }
+  .album-cover-large { touch-action: none; user-select: none; cursor: grab; }
+  .swipe-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); color: #fff; padding: 6px 12px; border-radius: 999px; font-size: 12px; letter-spacing: 0.2px; pointer-events: none; }
   .lyrics-btn-large:hover, .lyrics-btn-large.active { border-color: var(--accent); color: var(--accent); }
   .minimize-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
   .minimize-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -503,6 +504,7 @@
       <div class="album-cover-large" id="albumCoverLarge">
         <div class="cover-placeholder">🎵</div>
       </div>
+      <div class="swipe-hint">Swipe left for lyrics</div>
       <button class="minimize-btn top-minimize-btn" onclick="minimizePlayer()">⬇</button>
       <div class="song-info-large">
         <h1 class="song-title-large" id="songTitleLarge">Select a song</h1>
@@ -1171,11 +1173,8 @@ let fsTouchStartY = 0;
 let fsPointerActive = false;
 function initFullscreenSwipe() {
   const cover = document.getElementById("playerCoverPane");
-  const coverThumb = document.getElementById("albumCoverLarge");
   const lyricsOverlay = document.getElementById("fullscreenLyrics");
   if (!cover) return;
-  const targets = [cover];
-  if (coverThumb) targets.push(coverThumb);
   const startSwipe = (x, y) => {
     fsTouchStartX = x;
     fsTouchStartY = y;
@@ -1186,66 +1185,97 @@ function initFullscreenSwipe() {
     fsPointerActive = false;
     const dx = x - fsTouchStartX;
     const dy = y - fsTouchStartY;
-    if (dx < -30 && Math.abs(dy) < 100) {
+    if (dx < -50 && Math.abs(dy) < 100) {
       showFullscreenLyrics();
     }
   };
-  const cancelSwipe = () => { fsPointerActive = false; };
-  targets.forEach(target => {
-    target.addEventListener("touchstart", e => {
-      const t = e.touches[0];
-      startSwipe(t.clientX, t.clientY);
-    });
-    target.addEventListener("touchend", e => {
-      const t = e.changedTouches[0];
-      endSwipe(t.clientX, t.clientY);
-    });
-    target.addEventListener("touchcancel", cancelSwipe);
-    target.addEventListener("pointerdown", e => {
-      if (e.pointerType === "touch" || e.pointerType === "mouse") {
-        startSwipe(e.clientX, e.clientY);
-      }
-    });
-    target.addEventListener("pointerup", e => {
-      if (e.pointerType === "touch" || e.pointerType === "mouse") {
-        endSwipe(e.clientX, e.clientY);
-      }
-    });
-    target.addEventListener("pointercancel", cancelSwipe);
-    target.addEventListener("click", e => {
-      if (e.target.closest(".minimize-btn")) return;
+  const moveSwipe = (x, y) => {
+    if (!fsPointerActive) return;
+    const dx = x - fsTouchStartX;
+    const dy = y - fsTouchStartY;
+    if (dx < -50 && Math.abs(dy) < 100) {
+      fsPointerActive = false;
       showFullscreenLyrics();
-    });
+    }
+  };
+  cover.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    startSwipe(t.clientX, t.clientY);
+  });
+  cover.addEventListener("touchmove", e => {
+    const t = e.touches[0];
+    moveSwipe(t.clientX, t.clientY);
+  });
+  cover.addEventListener("touchend", e => {
+    const t = e.changedTouches[0];
+    endSwipe(t.clientX, t.clientY);
+  });
+  cover.addEventListener("touchcancel", () => { fsPointerActive = false; });
+  cover.addEventListener("pointerdown", e => {
+    if (e.pointerType === "touch" || e.pointerType === "mouse") {
+      startSwipe(e.clientX, e.clientY);
+    }
+  });
+  cover.addEventListener("pointermove", e => {
+    if (e.pointerType === "touch" || e.pointerType === "mouse") {
+      moveSwipe(e.clientX, e.clientY);
+    }
+  });
+  cover.addEventListener("pointerup", e => {
+    if (e.pointerType === "touch" || e.pointerType === "mouse") {
+      endSwipe(e.clientX, e.clientY);
+    }
+  });
+  cover.addEventListener("pointercancel", () => { fsPointerActive = false; });
+  cover.addEventListener("click", e => {
+    if (e.target.closest(".minimize-btn")) return;
+    showFullscreenLyrics();
   });
   if (lyricsOverlay) {
     lyricsOverlay.addEventListener("touchstart", e => {
       const t = e.touches[0];
       startSwipe(t.clientX, t.clientY);
     });
+    lyricsOverlay.addEventListener("touchmove", e => {
+      const t = e.touches[0];
+      const dx = t.clientX - fsTouchStartX;
+      const dy = t.clientY - fsTouchStartY;
+      if (dx > 50 && Math.abs(dy) < 100) {
+        closeFullscreenLyrics();
+      }
+    });
     lyricsOverlay.addEventListener("touchend", e => {
       const t = e.changedTouches[0];
       const dx = t.clientX - fsTouchStartX;
       const dy = t.clientY - fsTouchStartY;
-      if (dx > 40 && Math.abs(dy) < 80) {
+      if (dx > 50 && Math.abs(dy) < 100) {
         closeFullscreenLyrics();
       }
     });
-    lyricsOverlay.addEventListener("touchcancel", cancelSwipe);
     lyricsOverlay.addEventListener("pointerdown", e => {
       if (e.pointerType === "touch" || e.pointerType === "mouse") {
         startSwipe(e.clientX, e.clientY);
+      }
+    });
+    lyricsOverlay.addEventListener("pointermove", e => {
+      if (e.pointerType === "touch" || e.pointerType === "mouse") {
+        const dx = e.clientX - fsTouchStartX;
+        const dy = e.clientY - fsTouchStartY;
+        if (dx > 50 && Math.abs(dy) < 100) {
+          closeFullscreenLyrics();
+        }
       }
     });
     lyricsOverlay.addEventListener("pointerup", e => {
       if (e.pointerType === "touch" || e.pointerType === "mouse") {
         const dx = e.clientX - fsTouchStartX;
         const dy = e.clientY - fsTouchStartY;
-        if (dx > 40 && Math.abs(dy) < 80) {
+        if (dx > 50 && Math.abs(dy) < 100) {
           closeFullscreenLyrics();
         }
       }
     });
-    lyricsOverlay.addEventListener("pointercancel", cancelSwipe);
+    lyricsOverlay.addEventListener("pointercancel", () => { fsPointerActive = false; });
   }
 }
 
