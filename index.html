@@ -368,7 +368,7 @@
   .fullscreen-lyrics .lyrics-full-body { flex: 1; overflow-y: auto; font-size: 16px; line-height: 1.8; color: var(--text-muted); }
   .fullscreen-lyrics .lyrics-full-body p { margin: 0 0 12px; }
   .fullscreen-lyrics .lyrics-line-full { margin: 0 0 12px; white-space: pre-wrap; }
-  .lyrics-line.active, .lyrics-line-full.active { color: var(--accent); font-weight: bold; }
+  .lyrics-line.active, .lyrics-line-full.active { color: var(--accent); font-weight: bold; background: rgba(29,185,84,0.2); padding: 4px; border-radius: 4px; }
 </style>
 </style>
 </head>
@@ -797,7 +797,7 @@
       });
       const activeLine = document.getElementById(`lyric-${lineIdx}`);
       if (activeLine) activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 500);
+    }, 100);
   }
   // ── LOGIN ────────────────────────────────────────────────────
   async function doLogin() {
@@ -1167,7 +1167,7 @@ function showFullscreenLyrics() {
       });
       const activeLine = document.getElementById(`fullscreen-lyric-${lineIdx}`);
       if (activeLine) activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 500);
+    }, 100);
   } else {
     body.innerHTML = `<div class="lyrics-empty">Lyrics unavailable</div>`;
   }
