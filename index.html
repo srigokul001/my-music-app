@@ -20,6 +20,9 @@
     .new-playlist-row button { font-size: 9px; padding: 3px 5px; min-width: 24px; }
     .playlist-item { font-size: 8px; padding: 3px 4px; }
     .playlist-count { font-size: 6px; padding: 0px 2px; }
+    .volume-section { padding: 5px; gap: 6px; }
+    .volume-section .vol-icon { font-size: 14px; }
+    input[type=range].vol-bar-vertical { height: 4px; width: 70px; transform: rotate(-90deg); transform-origin: center; margin: 35px 0; }
     .app-body { flex-direction: row; height: calc(100dvh - 64px); }
     .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; }
     .main-header { padding: 10px 12px; gap: 8px; }
@@ -59,6 +62,9 @@
     .playlist-count { font-size: 6px; padding: 0px 2px; }
     .playlist-songs-list { padding: 1px 2px 2px 10px; }
     .playlist-song-item { font-size: 7px; padding: 1px 0; }
+    .volume-section { padding: 4px; gap: 4px; }
+    .volume-section .vol-icon { font-size: 12px; }
+    input[type=range].vol-bar-vertical { height: 4px; width: 60px; transform: rotate(-90deg); transform-origin: center; margin: 30px 0; }
     .main-header { padding: 8px 10px; gap: 8px; }
     .search-wrap { padding: 7px 10px; }
     .section-header { padding: 0 10px 8px; }
@@ -145,6 +151,11 @@
   .playlist-songs-list { padding: 2px 4px 4px 14px; display: flex; flex-direction: column; gap: 1px; }
   .playlist-song-item { font-size: 8px; color: var(--text-dim); padding: 2px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 3px; }
   .playlist-song-item::before { content: '♪'; color: var(--accent); font-size: 6px; }
+  .volume-section { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 4px; }
+  .volume-section .vol-icon { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+  .volume-section input[type=range].vol-bar-vertical { width: 100px; height: 4px; -webkit-appearance: none; appearance: none; background: var(--border); border-radius: 2px; cursor: pointer; outline: none; transform: rotate(-90deg); transform-origin: center; margin: 50px 0; }
+  .volume-section input[type=range].vol-bar-vertical::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text); margin-top: -5px; }
+  .volume-section input[type=range].vol-bar-vertical::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: none; }
   /* MAIN */
   .main { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y; background: var(--bg); transition: background 0.3s; }
   .main-header { position: sticky; top: 0; z-index: 10; background: linear-gradient(180deg, var(--bg) 80%, transparent); padding: 20px 24px 12px; display: flex; align-items: center; gap: 16px; }
@@ -241,13 +252,18 @@
   .progress-row { width: 100%; display: flex; align-items: center; gap: 8px; }
   .time-label { font-size: 10px; color: var(--text-dim); min-width: 30px; }
   .time-label.right { text-align: right; }
-  input[type=range].prog-bar { flex: 1; -webkit-appearance: none; height: 3px; background: var(--border); border-radius: 3px; outline: none; cursor: pointer; }
+  input[type=range].prog-bar { flex: 1; -webkit-appearance: none; appearance: none; height: 3px; background: var(--border); border-radius: 3px; outline: none; cursor: pointer; }
   input[type=range].prog-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--text); opacity: 0; transition: opacity 0.2s; }
   input[type=range].prog-bar:hover::-webkit-slider-thumb { opacity: 1; }
   .player-right { display: flex; align-items: center; gap: 10px; width: 200px; justify-content: flex-end; }
   .vol-icon { color: var(--text-muted); font-size: 14px; }
-  input[type=range].vol-bar { width: 80px; -webkit-appearance: none; height: 3px; background: var(--border); border-radius: 3px; cursor: pointer; outline: none; }
+  input[type=range].vol-bar { width: 80px; -webkit-appearance: none; appearance: none; height: 3px; background: var(--border); border-radius: 3px; cursor: pointer; outline: none; }
   input[type=range].vol-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--text); }
+  .volume-control { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px; }
+  .volume-control .vol-icon { font-size: 16px; margin-bottom: 4px; }
+  input[type=range].vol-bar-vertical { width: 4px; height: 80px; -webkit-appearance: none; appearance: none; background: var(--border); border-radius: 2px; cursor: pointer; outline: none; writing-mode: bt-lr; }
+  input[type=range].vol-bar-vertical::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--text); margin-top: -4px; }
+  input[type=range].vol-bar-vertical::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--text); border: none; }
   .lyrics-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.2s; white-space: nowrap; }
   .lyrics-btn:hover, .lyrics-btn.active { border-color: var(--accent); color: var(--accent); }
   /* MODAL */
@@ -330,6 +346,13 @@
         <div class="sidebar-section-title">Playlists</div>
         <div class="playlist-list" id="playlistList"></div>
       </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Volume</div>
+        <div class="volume-section">
+          <span class="vol-icon">🔊</span>
+          <input type="range" class="vol-bar-vertical" id="volBar" min="0" max="1" step="0.01" value="0.8" oninput="setVol()" />
+        </div>
+      </div>
     </div>
     <div class="main">
       <div class="main-header">
@@ -386,8 +409,6 @@
       </div>
     </div>
     <div class="player-right">
-      <span class="vol-icon">🔊</span>
-      <input type="range" class="vol-bar" id="volBar" min="0" max="1" step="0.01" value="0.8" oninput="setVol()" />
       <button class="lyrics-btn" id="lyricsToggleBtn" onclick="toggleLyrics()">📝 Lyrics</button>
     </div>
   </div>
@@ -543,6 +564,7 @@
   let playCounts=JSON.parse(localStorage.getItem("ms_playCounts")||"{}"); // Track play counts for popularity
   let dateAdded=JSON.parse(localStorage.getItem("ms_dateAdded")||"{}"); // Track when songs were added
   const audio=document.getElementById("audioPlayer");
+  audio.volume = 0.8; // Initialize volume to match slider default
   // ── EQUALIZER SETUP ──────────────────────────────────────────
   let audioCtx, analyser, source, animFrame;
   const canvas = document.getElementById("equalizerCanvas");
