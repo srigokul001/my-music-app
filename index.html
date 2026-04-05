@@ -10,19 +10,20 @@
   }
   /* App body flex layout-ah maathi content-ah full width aakanum */
   .app-body {
-    display: block; 
+    display: flex; 
+    flex-direction: column;
     height: calc(100vh - 72px);
-    overflow-y: auto;
   }
   .main {
+    flex: 1;
+      overflow-y: auto;
     width: 100%;
-    padding: 0;
   }
   /* Album grid row-ku 2 songs vara maari adjust panradhu */
   .album-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px;
-    padding: 10px 15px 150px;
+    padding: 0 12px 140px !important;
   }
   .main-header {
     padding: 10px 15px;
@@ -42,8 +43,15 @@
   bottom: 72px; /* Exact-ah player bar mela niknum */
   height: 60px;
 }
-  .player-bar {
-    padding: 0 10px;
+ .player-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100% !important;
+      z-index: 9999;
+      background: var(--player-bg);
+      padding: 0 10px;
   }
   .player-left {
     width: 120px;
