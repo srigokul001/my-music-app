@@ -199,7 +199,8 @@
   .section-header { display: flex; align-items: center; justify-content: space-between; padding: 0 24px 16px; }
   .section-header h2 { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
   .section-sub { font-size: 12px; color: var(--text-dim); }
-  .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; padding: 0 24px 120px; }
+  .album-grid { display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding: 0 24px 120px; -webkit-overflow-scrolling: touch; }
+  .album-card { flex-shrink: 0; width: 160px; scroll-snap-align: start; }
   .album-grid.list-view { grid-template-columns: 1fr; }
   .album-card { background: var(--card-bg); border-radius: 12px; padding: 14px; cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; animation: fadeUp 0.4s ease both; }
   .album-grid.list-view .album-card { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px; }
@@ -1176,6 +1177,7 @@ function showFullscreenLyrics() {
 
 function closeFullscreenLyrics() {
   document.getElementById("fullscreenLyrics").classList.remove("active");
+  document.getElementById("fullscreenLyrics").style.transform = '';
   if (fullscreenLyricsInterval) {
     clearInterval(fullscreenLyricsInterval);
     fullscreenLyricsInterval = null;
@@ -1199,12 +1201,20 @@ function initFullscreenSwipe() {
     fsPointerActive = false;
     const dx = x - fsTouchStartX;
     const dy = y - fsTouchStartY;
+    // Reset visual feedback
+    const pane = document.getElementById("playerCoverPane");
+    pane.style.transform = '';
     if (dx < -30 && Math.abs(dy) < 100) {
       showFullscreenLyrics();
     }
   };
   const moveSwipe = (x, y) => {
-    // Removed trigger on move to avoid premature activation
+    if (!fsPointerActive) return;
+    const dx = x - fsTouchStartX;
+    const dy = y - fsTouchStartY;
+    // Visual feedback: move the cover pane with the swipe
+    const pane = document.getElementById("playerCoverPane");
+    pane.style.transform = `translateX(${Math.max(dx, -100)}px)`;
   };
   cover.addEventListener("touchstart", e => {
     const t = e.touches[0];
@@ -1262,6 +1272,8 @@ function initFullscreenSwipe() {
       const t = e.touches[0];
       const dx = t.clientX - fsTouchStartX;
       const dy = t.clientY - fsTouchStartY;
+      // Visual feedback for swipe
+      document.getElementById("fullscreenLyrics").style.transform = `translateX(${dx}px)`;
       if (dx > 50 && Math.abs(dy) < 100) {
         closeFullscreenLyrics();
       }
@@ -1283,6 +1295,8 @@ function initFullscreenSwipe() {
       if (e.pointerType === "touch" || e.pointerType === "mouse") {
         const dx = e.clientX - fsTouchStartX;
         const dy = e.clientY - fsTouchStartY;
+        // Visual feedback for swipe
+        document.getElementById("fullscreenLyrics").style.transform = `translateX(${dx}px)`;
         if (dx > 50 && Math.abs(dy) < 100) {
           closeFullscreenLyrics();
         }
