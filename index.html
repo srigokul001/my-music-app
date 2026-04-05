@@ -232,9 +232,12 @@
   #equalizerCanvas.active { opacity: 1; }
   /* LYRICS PANEL */
   .lyrics-panel {
-    position: fixed; inset: 0; background: #0a0a0a;
-    color: var(--text); z-index: 10000;
-    display: none; flex-direction: column; padding: 30px; overflow-y: auto;
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 350px; height: 450px; background: rgba(10,10,10,0.95);
+    border: 1px solid var(--border); border-radius: 12px;
+    display: none; flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10000;
+    overflow: hidden;
   }
   .lyrics-panel.open { display: flex; }
   .light .lyrics-panel { background: #ebebeb; }
@@ -759,7 +762,6 @@
     lyricsOpen = !lyricsOpen;
     document.getElementById("lyricsPanel").classList.toggle("open", lyricsOpen);
     document.getElementById("lyricsToggleBtnLarge").classList.toggle("active", lyricsOpen);
-    document.getElementById("playerBar").style.display = lyricsOpen ? "none" : "flex";
   }
   function updateLyricsPanel(i) {
     const s = songs[i];
