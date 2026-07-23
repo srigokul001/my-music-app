@@ -6,10 +6,10 @@
 <style>
   @media (max-width: 1024px) {
     .mobile-bottom-nav { display: flex; }
-    .sidebar { display: none; }
     .app-body { display: block; height: calc(100dvh - 64px); }
+    .sidebar { display: none !important; }
     .volume-section { display: none; }
-    .main { flex: 1; overflow-y: auto; width: 100%; -webkit-overflow-scrolling: touch; padding-bottom: 140px; }
+    .main { flex: 1; overflow-y: auto; width: 100%; max-width: 100%; min-width: 0; -webkit-overflow-scrolling: touch; padding-bottom: 140px; }
     .main-header {
       position: sticky;
       top: 0;
@@ -933,11 +933,7 @@
     </button>
     <button class="mobile-nav-item" aria-label="Your Library" data-view="library">
       <span class="nav-icon">📚</span>
-      <span class="nav-label">Your Library</span>
-    </button>
-    <button class="mobile-nav-item" aria-label="Premium" data-view="home">
-      <span class="nav-icon">✦</span>
-      <span class="nav-label">Premium</span>
+      <span class="nav-label">Library</span>
     </button>
     <button class="mobile-nav-item" aria-label="Create" data-view="library">
       <span class="nav-icon">＋</span>
@@ -1729,9 +1725,9 @@ function showLoginForm() {
   renderGrid(songs);
   document.querySelectorAll('.mobile-nav-item').forEach((btn, idx) => {
     btn.addEventListener('click', () => {
-      const names = ['home', 'search', 'library', 'home', 'library'];
+      const names = ['home', 'search', 'library', 'library'];
       switchView(names[idx] || 'home');
-      if (idx === 4) {
+      if (idx === 3) {
         setTimeout(() => {
           document.getElementById('newPlaylistInput')?.focus();
         }, 50);
